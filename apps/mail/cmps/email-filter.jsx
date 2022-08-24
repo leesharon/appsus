@@ -1,9 +1,7 @@
-export function MailList() {
 
-    return (
-        <section>
-            <input type="search" placeholder="search inbox"/>
-        </section>
+export function EmailFilter() {
 
-    )
+    return <h1>
+        EmailFilter
+    </h1>
 }
