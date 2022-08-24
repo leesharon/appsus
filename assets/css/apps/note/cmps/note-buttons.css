@@ -1,0 +1,56 @@
+[name=pin-box] {
+    display: none;
+}
+
+.pin-box-label i {
+    font-size: 22px;
+}
+
+.pin-box-label.pinned i {
+    color: rgba(14, 13, 13, 0.986);
+}
+
+.pin-box-label.unpinned i {
+    color: lightgrey;
+}
+
+.pin-box-label.unpinned i:hover {
+    color: rgba(14, 13, 13, 0.986);
+}
+
+.color-btns-container {
+    position:absolute;
+    width:inherit;
+}
+
+.color-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 0.5px solid lightgray
+}
+
+button.plum {
+
+    background-color: plum;
+}
+
+button.lightgreen {
+    background-color: lightgreen;
+}
+
+button.lightcoral {
+    background-color: lightcoral;
+}
+
+button.slateblue {
+    background-color: slateblue;
+}
+
+button.lightskyblue {
+    background-color: lightskyblue;
+}
+
+button.peru {
+    background-color: peru;
+}

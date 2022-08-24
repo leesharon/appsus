@@ -1,10 +1,35 @@
-.note{
-    margin-top:0px;
-    margin-bottom:10px;
-    padding:5px;
+.note {
+    margin-top: 0px;
+    margin-bottom: 10px;
+    padding: 5px;
     break-inside: avoid-column;
     border-radius: 5%;
 }
-.note.white{
+
+.note.white {
     background-color: white;
+}
+
+.note.plum {
+    background-color: plum;
+}
+
+.note.lightgreen {
+    background-color: lightgreen;
+}
+
+.note.lightcoral {
+    background-color: lightcoral;
+}
+
+.note.slateblue {
+    background-color: slateblue;
+}
+
+.note.lightskyblue {
+    background-color: lightskyblue;
+}
+
+.note.peru {
+    background-color: peru;
 }

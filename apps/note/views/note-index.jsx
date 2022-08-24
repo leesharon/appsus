@@ -50,7 +50,7 @@ export class NoteIndex extends React.Component {
             .then(() => {
                 let notes = this.state.notes
                 notes = notes.filter(note => noteId !== note.id)
-                this.setState({ notes }, () => { console.log(this.state.notes) })
+                this.setState({ notes })
             }
             )
 
@@ -65,22 +65,30 @@ export class NoteIndex extends React.Component {
         )
     }
 
+    onChangeNoteColor = (noteId, color) => {
+        noteService.ChangeNoteColor(noteId, color)
+            .then(() => {
+                let notes = this.state.notes
+                notes.forEach(note => { if (note.id === noteId) note.style.backgroundColor = color })
+                this.setState({ notes: [...notes] })
+            }
+            )
+    }
 
 
     render() {
         const { notes, chosenNote } = this.state
         if (!notes) return <h1>loading from index</h1>
-        const { onNewNote, onEditNote, onChoseNote, onRemoveNote, onPinNote } = this
+        const { onNewNote, onEditNote, onChoseNote, onRemoveNote, onPinNote, onChangeNoteColor } = this
         const pinnedNotes = notes.filter((note) => note.isPinned)
         const unPinnedNotes = notes.filter((note) => !note.isPinned)
-        console.log(pinnedNotes, unPinnedNotes)
 
         return (
             <main className="full">
                 {chosenNote && <NoteDetails noteId={chosenNote.id} onEditNote={onEditNote} />}
                 <NoteCompose onNewNote={onNewNote} />
-                <NoteList notes={pinnedNotes} onChoseNote={onChoseNote} onPinNote={onPinNote} onRemoveNote={onRemoveNote} />
-                <NoteList notes={unPinnedNotes} onChoseNote={onChoseNote} onPinNote={onPinNote} onRemoveNote={onRemoveNote} />
+                <NoteList notes={pinnedNotes} onChangeNoteColor={onChangeNoteColor} onChoseNote={onChoseNote} onPinNote={onPinNote} onRemoveNote={onRemoveNote} />
+                <NoteList notes={unPinnedNotes} onChangeNoteColor={onChangeNoteColor} onChoseNote={onChoseNote} onPinNote={onPinNote} onRemoveNote={onRemoveNote} />
             </main>
         )
     }
