@@ -1,19 +1,24 @@
-import { storageService } from "./storage.service.js"
-import { utilService } from "./util.service.js"
+import { storageService } from "../../../services/storage.service.js"
+import { utilService } from "../../../services/util.service.js"
 
 export const emailService = {
   query,
   getById,
   remove,
-  createReview,
-  removeReview,
-  addGoogleBook,
-  getGoogleemails,
-  getNextBookId
+  getNextEmailId,
+  getLoggedInUser
 }
 
 const KEY = 'emailsDB'
-// const gemails
+const gEmails = _createEmails(20)
+const gLoggedInUser = {
+  email: 'user@appsus.com',
+  fullname: 'Mahatma Appsus'
+}
+
+function getLoggedInUser() {
+  return Promise.resolve(gLoggedInUser)
+}
 
 function query(filterBy) {
   let emails = _loadFromStorage()
@@ -44,7 +49,7 @@ function remove(emailId) {
 function getNextEmailId(emailId) {
   let emails = _loadFromStorage()
   const emailIdx = emails.findIndex(email => email.id === emailId)
-  let nextEmailIdx = (emailIdx === emails.length -1) ? 0 : emailIdx + 1
+  let nextEmailIdx = (emailIdx === emails.length - 1) ? 0 : emailIdx + 1
   return emails[nextEmailIdx].id
 }
 
@@ -53,6 +58,26 @@ function getById(emailId) {
   const emails = _loadFromStorage()
   const email = emails.find(email => email.id === emailId)
   return Promise.resolve(email)
+}
+
+function _createEmails(num) {
+  const emails = []
+  for (let i = 0; i < num; i++) {
+    const email = _createEmail()
+    emails.unshift(email)
+  }
+  return emails
+}
+
+function _createEmail() {
+  return {
+    id: utilService.makeId(),
+    subject: utilService.makeLorem(2),
+    body: utilService.makeLorem(5),
+    isRead: false,
+    sentAt: 1551133930594,
+    to: utilService.getRandomIntInclusive(0, 1) ? 'momo@momo.com' : 'user@appsus.com'
+  }
 }
 
 function _loadFromStorage() {
