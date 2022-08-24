@@ -1,8 +1,9 @@
 const { Link, NavLink, withRouter } = ReactRouterDOM
 export function AppHeader() {
 
-    return <header className="full app-header">
-        <Link to="/">
+    return <header className="full main-layout app-header">
+        <Link className="main-logo" to="/">
+            <img src="../assets/img/horse-hopper.png" alt="" />
             <h3>AppSus</h3>
         </Link>
         <nav>

@@ -5,7 +5,7 @@ export class EmailPreview extends React.Component {
 
     render() {
         const { email } = this.props
-        const sentAt = utilService.getDatePreview(email.sentAt)
+        const sentAt = utilService.getDatePreview(email.sentAt, true)
         return < tr className="email-preview" >
             <td>
                 <Link to={`/mail/details/${email.id}`}>⭐️</Link>

@@ -22,7 +22,7 @@ export class EmailFilter extends React.Component {
 
         return <section className="email-filter">
             <form onSubmit={onFilter}>
-                <button><i className="fa-solid fa-magnifying-glass"></i></button>
+                <button className="btn btn-search"><i className="fa-solid fa-magnifying-glass"></i></button>
                 <input
                     type="search"
                     placeholder="Search email"

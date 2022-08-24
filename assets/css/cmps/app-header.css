@@ -9,6 +9,11 @@ header {
     padding: 20px 0;
 }
 
+.app-header .main-logo {
+    display: flex;
+    align-items: center;
+}
+
 nav a {
     margin: .5em;
 }

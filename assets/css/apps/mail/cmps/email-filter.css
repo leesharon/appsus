@@ -1,0 +1,37 @@
+
+
+.email-filter form {
+    padding: 0px 20px;
+    border: none;
+    border-radius: 8px;
+    width: 60%;
+    margin: auto;
+    margin-bottom: 10px;
+    background-color: #474747;
+    font-size: 1.2em;
+}
+
+.email-filter form:focus {
+    background-color: #FFFFFF;
+}
+
+.email-filter .input-search {
+    width: 90%;
+    height: 50px;
+    background-color: transparent;
+    border: none;
+}
+
+.email-filter .btn-search {
+    background-color: transparent;
+    border: none;
+    margin-inline-end: 10px;
+}
+
+textarea:focus, input:focus{
+    outline: none;
+}
+
+.email-filter .btn-search:focus {
+    outline: none;
+}

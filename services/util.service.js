@@ -63,8 +63,9 @@ function getMonthName(date) {
     return monthNames[newDate.getMonth()]
 }
 
-function getDatePreview(date) {
+function getDatePreview(date, isShort) {
     const dateNum = new Date(date).getDate()
-    const monthName = getMonthName(date)
+    let monthName = getMonthName(date)
+    if (isShort) monthName = monthName.substring(0, 3)
     return monthName + ', ' + dateNum
 }
