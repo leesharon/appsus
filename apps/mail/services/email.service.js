@@ -13,7 +13,7 @@ const KEY = 'emailsDB'
 const gEmails = _createEmails(20)
 const gLoggedInUser = {
   email: 'user@appsus.com',
-  fullname: 'Mahatma Appsus'
+  fullName: 'Mahatma Appsus'
 }
 
 function getLoggedInUser() {
@@ -28,12 +28,37 @@ function query(filterBy) {
   }
 
   if (filterBy) {
-    let { name, minPrice, maxPrice } = filterBy
-    emails = emails.filter(book => (
-      book.listPrice.amount >= minPrice &&
-      book.listPrice.amount <= maxPrice &&
-      book.title.includes(name)
-    ))
+    let { folder, search } = filterBy
+
+    if (search) {
+      emails = emails.filter(email => (
+        email.body.includes(search) ||
+        email.to.includes(search) ||
+        email.subject.includes(search)
+      ))
+    } else {
+      switch (folder) {
+        case 'inbox':
+          emails = emails.filter(email => email.to === 'user@appsus.com')
+          break;
+
+        case 'sent':
+          emails = emails.filter(email => email.to !== 'user@appsus.com')
+          break;
+
+        case 'starred':
+          emails = emails.filter(email => email.status === 'starred')
+          break;
+
+        case 'drafts':
+          emails = emails.filter(email => email.status === 'drafts')
+          break;
+
+        case 'trash':
+          emails = emails.filter(email => email.status === 'trash')
+          break;
+      }
+    }
   }
 
   return Promise.resolve(emails)
@@ -75,6 +100,7 @@ function _createEmail() {
     subject: utilService.makeLorem(2),
     body: utilService.makeLorem(5),
     isRead: false,
+    status: null,
     sentAt: 1551133930594,
     to: utilService.getRandomIntInclusive(0, 1) ? 'momo@momo.com' : 'user@appsus.com'
   }
