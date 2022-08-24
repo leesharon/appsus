@@ -1,10 +1,13 @@
-export function MailList() {
+import { EmailPreview } from "./email-preview.jsx";
 
-    return (
+export function EmailList() {
+
+    return <section className="email-list">
+        <h1>EmailList</h1>
         <table>
             <tbody>
-                hey
+                <EmailPreview />
             </tbody>
         </table>
-    )
+    </section>
 }
