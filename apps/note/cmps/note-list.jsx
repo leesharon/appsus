@@ -7,7 +7,7 @@ class _NoteList extends React.Component {
 
 
     render() {
-        const { notes,onChoseNote,onRemoveNote,onPinNote } = this.props
+        const { notes, onChoseNote, onRemoveNote, onPinNote,onChangeNoteColor } = this.props
         const { onOpenEdit } = this
         if (!notes) return <h1>loading</h1>
         return (
@@ -18,8 +18,10 @@ class _NoteList extends React.Component {
                         <article className={`note ${backgroundColor}`} key={note.id}>
                             <NotePreview note={note} />
                             <section className="button-list">
-                                <button onClick={() => onChoseNote(note)}>Edit</button>
-                                <NoteButtons onRemoveNote={onRemoveNote} onPinNote={onPinNote} noteId={note.id}/>
+                                <button onClick={() => onChoseNote(note)}>
+                                    <i className="fa-solid fa-pen"></i>
+                                </button>
+                                <NoteButtons onChangeNoteColor={onChangeNoteColor} onRemoveNote={onRemoveNote} onPinNote={onPinNote} noteId={note.id} />
                             </section>
                         </article>
 

@@ -10,7 +10,8 @@ export const noteService = {
     EditNote,
     removeNote,
     isPinned,
-    pinNote
+    pinNote,
+    ChangeNoteColor
 }
 
 const notesKEY = 'notesDB'
@@ -68,13 +69,19 @@ function createNote(type, content) {
     return Promise.resolve(newNote)
 }
 
+function ChangeNoteColor(noteId, color) {
+    const notes = _loadNotesFromStorage()
+    notes.forEach(note => { if (note.id === noteId) note.style.backgroundColor = color })
+    _saveNotesToStorage(notes)
+    return Promise.resolve()
+
+
+}
 
 function pinNote(noteId) {
-    console.log('got here')
     const notes = _loadNotesFromStorage()
-    notes.forEach(note=>{if (note.id === noteId) note.isPinned = !note.isPinned})
+    notes.forEach(note => { if (note.id === noteId) note.isPinned = !note.isPinned })
     _saveNotesToStorage(notes)
-    console.log(notes)
     return Promise.resolve()
 }
 
@@ -108,7 +115,7 @@ function makeNotes() {
             type: "note-txt",
             isPinned: false,
             info: {
-                title:'random',
+                title: 'random',
                 txt: "Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!"
             },
             style: {
@@ -120,7 +127,7 @@ function makeNotes() {
             type: "note-txt",
             isPinned: false,
             info: {
-                title:'tritle',
+                title: 'tritle',
                 txt: "Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!"
             },
             style: {
@@ -132,7 +139,7 @@ function makeNotes() {
             type: "note-txt",
             isPinned: false,
             info: {
-                title:'tritle',
+                title: 'tritle',
                 txt: "Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!"
             },
             style: {
@@ -144,7 +151,7 @@ function makeNotes() {
             type: "note-txt",
             isPinned: false,
             info: {
-                title:'title',
+                title: 'title',
                 txt: "Fullstack Me Baby!"
             },
             style: {
@@ -156,7 +163,7 @@ function makeNotes() {
             type: "note-txt",
             isPinned: false,
             info: {
-                title:'something',
+                title: 'something',
                 txt: "Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!"
             },
             style: {
