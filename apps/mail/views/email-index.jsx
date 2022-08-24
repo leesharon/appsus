@@ -62,7 +62,7 @@ export class EmailIndex extends React.Component {
         const { emails } = this.state
 
         if (!emails) return <h1>Loading...</h1>
-        return <section className="email-app">
+        return <section className="full email-index">
             <EmailFilter onSetSearchFilter={this.onSetSearchFilter} />
             <div className="main-content">
                 <EmailFolderList />
