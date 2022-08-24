@@ -108,7 +108,11 @@ function makeNotes() {
             type: "note-txt",
             isPinned: false,
             info: {
+                title:'random',
                 txt: "Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!"
+            },
+            style: {
+                backgroundColor: 'white'
             }
         },
         {
@@ -116,7 +120,11 @@ function makeNotes() {
             type: "note-txt",
             isPinned: false,
             info: {
+                title:'tritle',
                 txt: "Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!"
+            },
+            style: {
+                backgroundColor: 'white'
             }
         },
         {
@@ -124,7 +132,11 @@ function makeNotes() {
             type: "note-txt",
             isPinned: false,
             info: {
+                title:'tritle',
                 txt: "Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!"
+            },
+            style: {
+                backgroundColor: 'white'
             }
         },
         {
@@ -132,7 +144,11 @@ function makeNotes() {
             type: "note-txt",
             isPinned: false,
             info: {
+                title:'title',
                 txt: "Fullstack Me Baby!"
+            },
+            style: {
+                backgroundColor: 'white'
             }
         },
         {
@@ -140,7 +156,11 @@ function makeNotes() {
             type: "note-txt",
             isPinned: false,
             info: {
+                title:'something',
                 txt: "Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!"
+            },
+            style: {
+                backgroundColor: 'white'
             }
         },
     ]
