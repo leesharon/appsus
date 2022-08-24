@@ -7,7 +7,10 @@ export const noteService = {
     getNotes,
     createNote,
     getById,
-    EditNote
+    EditNote,
+    removeNote,
+    isPinned,
+    pinNote
 }
 
 const notesKEY = 'notesDB'
@@ -23,11 +26,9 @@ function getNotes() {
 }
 
 
-function EditNote(newNote){
-    const notes = _loadNotesFromStorage()
-    const noteId = newNote.id
-    const noteIdx = notes.findIndex(note => noteId === note.id)
-    notes.splice(noteIdx,1,newNote)
+function EditNote(newNote) {
+    let notes = _loadNotesFromStorage()
+    notes = notes.map((note) => (note.id === newNote.id) ? newNote : note)
     _saveNotesToStorage(notes)
     return Promise.resolve(newNote)
 
@@ -37,6 +38,21 @@ function getById(noteId) {
     const notes = _loadNotesFromStorage()
     const note = notes.find(note => noteId === note.id)
     return Promise.resolve(note)
+}
+function isPinned(noteId) {
+    const notes = _loadNotesFromStorage()
+    const note = notes.find(note => noteId === note.id)
+    return Promise.resolve(note.isPinned)
+
+}
+
+function removeNote(noteId) {
+    if (!noteId) return Promise.resolve(null)
+    let notes = _loadNotesFromStorage()
+    notes = notes.filter(note => noteId !== note.id)
+    _saveNotesToStorage(notes)
+    return Promise.resolve()
+
 }
 
 function createNote(type, content) {
@@ -52,6 +68,16 @@ function createNote(type, content) {
     return Promise.resolve(newNote)
 }
 
+
+function pinNote(noteId) {
+    console.log('got here')
+    const notes = _loadNotesFromStorage()
+    notes.forEach(note=>{if (note.id === noteId) note.isPinned = !note.isPinned})
+    _saveNotesToStorage(notes)
+    console.log(notes)
+    return Promise.resolve()
+}
+
 function _createTxtNote({ title, txt }) {
     return {
         id: utilService.makeId(),
@@ -59,7 +85,10 @@ function _createTxtNote({ title, txt }) {
         isPinned: false,
         info: {
             title,
-            txt
+            txt,
+        },
+        style: {
+            backgroundColor: 'white'
         }
     }
 }

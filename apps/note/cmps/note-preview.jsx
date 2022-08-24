@@ -27,10 +27,13 @@ export class NotePreview extends React.Component {
 }
 
 function TxtNote({ note }) {
+    const { backgroundColor } = note.style
+    const { title, txt } = note.info
     return (
         <div>
-            <h3>{note.info.title}</h3>
-            <p>{note.info.txt}</p>
+            <h3>{title}</h3>
+            <p>{txt}</p>
+            <p>{backgroundColor}</p>
         </div>
     )
 }
