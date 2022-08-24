@@ -1,10 +1,15 @@
 .folder-list {
     display: flex;
     flex-direction: column;
-    gap: 18px;
+    gap: 32px;
     flex-basis: 10%;
     min-height: 91vh;
     margin-top: 13px;
+    margin-inline-start: 5px;
+}
+
+.folder-list li:hover {
+    cursor: pointer;
 }
 
 .folder-list i {

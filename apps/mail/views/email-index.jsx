@@ -1,7 +1,7 @@
 
 import { EmailFilter } from "../cmps/email-filter.jsx"
-import { EmailFolderList } from "../cmps/email-folder-list.jsx"
 import { EmailList } from "../cmps/email-list.jsx"
+import { EmailSideBar } from "../cmps/email-side-bar.jsx"
 import { emailService } from "../services/email.service.js"
 
 export class EmailIndex extends React.Component {
@@ -49,6 +49,19 @@ export class EmailIndex extends React.Component {
             })
     }
 
+    onRemoveEmail = (emailId) => {
+        emailService.remove(emailId)
+            .then(() => {
+                console.log('Removed!')
+                const emails = this.state.emails.filter(email => email.id !== emailId)
+                this.setState({ emails })
+                //! showSuccessMsg('Car removed')
+            })
+            .catch(err => {
+                console.log('Problem!!', err)
+            })
+    }
+
     onSetSearchFilter = (search) => {
         this.setState((prevState) => ({
             filterBy: {
@@ -65,8 +78,8 @@ export class EmailIndex extends React.Component {
         return <section className="full email-index">
             <EmailFilter onSetSearchFilter={this.onSetSearchFilter} />
             <div className="main-content">
-                <EmailFolderList />
-                <EmailList emails={emails} />
+                <EmailSideBar />
+                <EmailList onRemoveEmail={this.onRemoveEmail} emails={emails} />
             </div>
         </section >
     }

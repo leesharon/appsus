@@ -1,6 +1,6 @@
 import { EmailPreview } from "./email-preview.jsx";
 
-export function EmailList({ emails }) {
+export function EmailList({ emails, onRemoveEmail }) {
 
     return <section className="email-list">
         <table>
@@ -8,6 +8,7 @@ export function EmailList({ emails }) {
                 {emails.map(email => <EmailPreview
                     key={email.id}
                     email={email}
+                    onRemoveEmail={onRemoveEmail}
                 />)}
             </tbody>
         </table>

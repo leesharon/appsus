@@ -3,14 +3,23 @@
 .email-list {
     background-color: #161616;
     padding-inline-start: 8px;
+    width: 100%;
+    display: flex;
+    border-radius: 20px;
+}
+
+.email-list table {
+    width: 100%;
 }
 
 .email-list tr {
     margin: 10px 0px;
+    justify-content: space-between;
 }
 
 .email-list tr:hover {
     box-shadow: 0px 0px 5px 4px rgb(255 255 255 / 12%);
+    cursor: pointer;
 }
 
 .email-list td {

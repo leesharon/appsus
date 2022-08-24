@@ -1,24 +1,29 @@
 import { utilService } from "../../../services/util.service.js";
-const { Link } = ReactRouterDOM
+import { EmailDetails } from "../views/email-details.jsx";
 
 export class EmailPreview extends React.Component {
 
+    state = {
+        isShown: false
+    }
+
+    onShowEmail = () => {
+        this.setState(({ isShown }) => ({ isShown: !isShown }))
+    }
+
     render() {
-        const { email } = this.props
+        const { email, onRemoveEmail } = this.props
+        const { isShown } = this.state
         const sentAt = utilService.getDatePreview(email.sentAt, true)
-        return < tr className="email-preview" >
-            <td>
-                <Link to={`/mail/details/${email.id}`}>⭐️</Link>
-            </td>
-            <td colSpan="2">
-                <Link to={`/mail/details/${email.id}`}>{email.to}</Link>
-            </td>
-            <td colSpan="4">
-                <Link to={`/mail/details/${email.id}`}>{email.body}</Link>
-            </td>
-            <td>
-                <Link to={`/mail/details/${email.id}`}>{sentAt}</Link>
-            </td>
-        </tr >
+        const shortEmailBody = utilService.trimString(email.body)
+        return <React.Fragment>
+            < tr onClick={this.onShowEmail} className="email-preview" >
+                <td>⭐️</td>
+                <td colSpan="2">{email.to}</td>
+                <td colSpan="10">{shortEmailBody}</td>
+                <td>{sentAt}</td>
+            </tr >
+            {isShown && <EmailDetails onRemoveEmail={onRemoveEmail} email={email}/>}
+        </React.Fragment>
     }
 }

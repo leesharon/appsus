@@ -6,7 +6,8 @@ export const utilService = {
     padNum,
     getDayName,
     getMonthName,
-    getDatePreview
+    getDatePreview,
+    trimString
 }
 
 function makeId(length = 6) {
@@ -67,5 +68,13 @@ function getDatePreview(date, isShort) {
     const dateNum = new Date(date).getDate()
     let monthName = getMonthName(date)
     if (isShort) monthName = monthName.substring(0, 3)
-    return monthName + ', ' + dateNum
+    return monthName + ' ' + dateNum
+}
+
+function trimString(string) {
+    const maxLength = 70
+    var trimmedStr = string.substring(0, maxLength)
+    trimmedStr = trimmedStr.substring(0, Math.min(trimmedStr.length, trimmedStr.lastIndexOf(" ")))
+    trimmedStr += '...'
+    return trimmedStr
 }
