@@ -1,6 +1,10 @@
 .note{
-    background-color: cyan;
     margin-top:0px;
     margin-bottom:10px;
     padding:5px;
+    break-inside: avoid-column;
+    border-radius: 5%;
+}
+.note.white{
+    background-color: white;
 }

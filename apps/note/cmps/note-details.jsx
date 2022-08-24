@@ -12,7 +12,7 @@ export class NoteDetails extends React.Component {
 
     componentDidMount() {
         this.loadNote()
-        console.log(this.inputRef)
+        // console.log(this.inputRef)
     }
 
     onHandleChange = ({ target: { name, value } }) => {
@@ -23,29 +23,27 @@ export class NoteDetails extends React.Component {
             }
         }))
 
+
     }
 
     onSaveChanges = () => {
         const newNote = this.state.note
-        noteService.EditNote(newNote)
-        console.log(newNote)
-        eventBusService.emit('edit-note', newNote)
+        this.props.onEditNote(newNote)
     }
 
 
     loadNote = () => {
-        const { noteId } = this.props.match.params
+        const { noteId } = this.props
         noteService.getById(noteId)
-            .then((note) => {
-                if (!note) this.props.history.push('/note')
-                this.setState({ note })
-            })
+            .then((note) => this.setState({ note }))
+
+
     }
 
     render() {
         const { note } = this.state
         if (!note) return
-        const { onHandleChange,onSaveChanges } = this
+        const { onHandleChange, onSaveChanges } = this
         const { title, txt } = note.info
         return (
             <article>

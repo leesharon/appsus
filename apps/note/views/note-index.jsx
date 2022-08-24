@@ -11,19 +11,12 @@ const { Route } = ReactRouterDOM
 export class NoteIndex extends React.Component {
 
     state = {
-        notes: null
+        notes: null,
+        chosenNote: null
     }
 
     componentDidMount() {
         this.loadNotes()
-        eventBusService.on('edit-note', (editedNote) => {
-            const noteId = editedNote.id
-            const notes = this.state.notes
-            const noteIdx = notes.findIndex(note => noteId === note.id)
-            notes.splice(noteIdx, 1, editedNote)
-            console.log('got activated', notes)
-            this.setState({ notes:[...notes]})
-        })
     }
 
     loadNotes = () => {
@@ -37,30 +30,58 @@ export class NoteIndex extends React.Component {
         })
     }
 
-    // onEditNote = (newNotePrm) => {
-    //     newNotePrm
-    //         .then((note) => {
-    //             const notes = this.state.notes
-    //             const noteId = note.id
-    //             const noteIdx = notes.findIndex(note => noteId === note.id)
-    //             notes.splice(noteIdx, 1, newNote)
-    //             this.setState({ notes })
-    //         })
-    // }
+    onEditNote = (newNote) => {
+        noteService.EditNote(newNote)
+            .then(this.loadNotes())
+        // noteService.EditNote(newNote)
+        //     .then((newNoteFromService) => {
+        //         const notes = this.state.notes
+        //         const newNotes = notes.map((note) => (note.id === newNoteFromService.id) ? newNoteFromService : note)
+        //         this.setState({ notes: newNotes })
+        //     })
+    }
+
+    onChoseNote = (note) => {
+        this.setState({ chosenNote: note })
+    }
+
+    onRemoveNote = (noteId) => {
+        noteService.removeNote(noteId)
+            .then(() => {
+                let notes = this.state.notes
+                notes = notes.filter(note => noteId !== note.id)
+                this.setState({ notes }, () => { console.log(this.state.notes) })
+            }
+            )
+
+    }
+
+    onPinNote = (noteId) => {
+        noteService.pinNote(noteId).then(() => {
+            let notes = this.state.notes
+            notes.forEach(note => { if (note.id === noteId) note.isPinned = !note.isPinned })
+            this.setState({ notes: [...notes] })
+        }
+        )
+    }
+
+
 
     render() {
-        const { notes } = this.state
-        const { onNewNote } = this
+        const { notes, chosenNote } = this.state
         if (!notes) return <h1>loading from index</h1>
-        return (
-            <Router>
+        const { onNewNote, onEditNote, onChoseNote, onRemoveNote, onPinNote } = this
+        const pinnedNotes = notes.filter((note) => note.isPinned)
+        const unPinnedNotes = notes.filter((note) => !note.isPinned)
+        console.log(pinnedNotes, unPinnedNotes)
 
-                <main>
-                    <Route path="/note/:noteId" component={NoteDetails} />
-                    <NoteCompose onNewNote={onNewNote} />
-                    <NoteList notes={notes} />
-                </main>
-            </Router>
+        return (
+            <main>
+                {chosenNote && <NoteDetails noteId={chosenNote.id} onEditNote={onEditNote} />}
+                <NoteCompose onNewNote={onNewNote} />
+                <NoteList notes={pinnedNotes} onChoseNote={onChoseNote} onPinNote={onPinNote} onRemoveNote={onRemoveNote} />
+                <NoteList notes={unPinnedNotes} onChoseNote={onChoseNote} onPinNote={onPinNote} onRemoveNote={onRemoveNote} />
+            </main>
         )
     }
 }
