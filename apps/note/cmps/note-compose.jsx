@@ -20,6 +20,7 @@ export class NoteCompose extends React.Component {
         const { info, type } = this.state
         const newNotePrm = noteService.createNote(type, info)
         this.props.onNewNote(newNotePrm)
+        this.setState({ info: { txt: '', title: '' } })
     }
     render() {
         const { info, type } = this.state

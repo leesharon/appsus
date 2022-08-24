@@ -26,8 +26,10 @@ export class NoteDetails extends React.Component {
     }
 
     onSaveChanges = () => {
-        const newNotePrm =  noteService.EditNote(this.state.note)
-        // send to main to update his side aswell 
+        const newNote = this.state.note
+        noteService.EditNote(newNote)
+        console.log(newNote)
+        eventBusService.emit('edit-note', newNote)
     }
 
 
@@ -43,9 +45,8 @@ export class NoteDetails extends React.Component {
     render() {
         const { note } = this.state
         if (!note) return
-        const { onHandleChange } = this
+        const { onHandleChange,onSaveChanges } = this
         const { title, txt } = note.info
-        console.log(this.props)
         return (
             <article>
                 <input
@@ -61,7 +62,7 @@ export class NoteDetails extends React.Component {
                     onChange={onHandleChange}
                     ref={this.inputRef}
                 />
-                <button onClick="">Save changes</button>
+                <button onClick={onSaveChanges}>Save changes</button>
             </article>
         )
     }
