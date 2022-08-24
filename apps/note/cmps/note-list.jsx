@@ -1,24 +1,26 @@
 import { NotePreview } from "./note-preview.jsx";
-import { noteService } from "../services/note.service.js";
+const { withRouter } = ReactRouterDOM
+
+class _NoteList extends React.Component {
 
 
-export class NoteList extends React.Component {
-
-    state = {
-        notes: []
+    onOpenEdit = (noteId) => {
+        this.props.history.push('/note/' + noteId)
     }
-    componentDidMount() {
-        noteService.getNotes()
-            .then((notes) => this.setState({ notes }))
-    }
+
     render() {
-        const { notes } = this.state
+        const { notes } = this.props
+        const { onOpenEdit } = this
+        if (!notes) return <h1>loading</h1>
         return (
             <section className="notes-container">
                 {notes.map((note) => {
                     return (
                         <article className="note" key={note.id}>
                             <NotePreview note={note} />
+                            <section className="button-list">
+                                <button onClick={() => onOpenEdit(note.id)}>Edit</button>
+                            </section>
                         </article>
 
                     )
@@ -27,3 +29,5 @@ export class NoteList extends React.Component {
         )
     }
 }
+
+export const NoteList = withRouter(_NoteList)
