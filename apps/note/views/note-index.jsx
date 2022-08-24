@@ -1,3 +1,4 @@
+import { eventBusService } from "../../../services/event-bus.service.js";
 import { NoteCompose } from "../cmps/note-compose.jsx";
 import { NoteDetails } from "../cmps/note-details.jsx";
 import { NoteList } from "../cmps/note-list.jsx";
@@ -15,6 +16,14 @@ export class NoteIndex extends React.Component {
 
     componentDidMount() {
         this.loadNotes()
+        eventBusService.on('edit-note', (editedNote) => {
+            const noteId = editedNote.id
+            const notes = this.state.notes
+            const noteIdx = notes.findIndex(note => noteId === note.id)
+            notes.splice(noteIdx, 1, editedNote)
+            console.log('got activated', notes)
+            this.setState({ notes:[...notes]})
+        })
     }
 
     loadNotes = () => {
@@ -28,20 +37,20 @@ export class NoteIndex extends React.Component {
         })
     }
 
-    onEditNote = (newNotePrm) => {
-        newNotePrm
-            .then((note) => {
-                const notes = this.state.notes
-                const noteId = note.id
-                const noteIdx = notes.findIndex(note => noteId === note.id)
-                notes.splice(noteIdx, 1, newNote)
-                this.setState({ notes })
-            })
-    }
+    // onEditNote = (newNotePrm) => {
+    //     newNotePrm
+    //         .then((note) => {
+    //             const notes = this.state.notes
+    //             const noteId = note.id
+    //             const noteIdx = notes.findIndex(note => noteId === note.id)
+    //             notes.splice(noteIdx, 1, newNote)
+    //             this.setState({ notes })
+    //         })
+    // }
 
     render() {
         const { notes } = this.state
-        const { onNewNote} = this
+        const { onNewNote } = this
         if (!notes) return <h1>loading from index</h1>
         return (
             <Router>
