@@ -6,6 +6,7 @@ export const utilService = {
     padNum,
     getDayName,
     getMonthName,
+    getDatePreview
 }
 
 function makeId(length = 6) {
@@ -55,8 +56,15 @@ function getDayName(date, locale) {
 
 
 function getMonthName(date) {
+    const newDate = new Date(date)
     const monthNames = ["January", "February", "March", "April", "May", "June",
         "July", "August", "September", "October", "November", "December"
     ]
-    return monthNames[date.getMonth()]
+    return monthNames[newDate.getMonth()]
+}
+
+function getDatePreview(date) {
+    const dateNum = new Date(date).getDate()
+    const monthName = getMonthName(date)
+    return monthName + ', ' + dateNum
 }

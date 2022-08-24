@@ -1,4 +1,25 @@
 {
     "liveServer.settings.port": 5503,
     "git.ignoreLimitWarning": true
+    "workbench.colorCustomizations": {
+        "activityBar.activeBackground": "#558fca",
+        "activityBar.background": "#558fca",
+        "activityBar.foreground": "#15202b",
+        "activityBar.inactiveForeground": "#15202b99",
+        "activityBarBadge.background": "#558fca",
+        "activityBarBadge.foreground": "#e7e7e7",
+        "commandCenter.border": "#e7e7e799",
+        "panel.border": "#558fca",
+        "sash.hoverBorder": "#558fca",
+        "statusBar.background": "#558fca",
+        "statusBar.foreground": "#e7e7e7",
+        "statusBarItem.hoverBackground": "#558fca",
+        "statusBarItem.remoteBackground": "#558fca",
+        "statusBarItem.remoteForeground": "#e7e7e7",
+        "tab.activeBorder": "#558fca",
+        "titleBar.activeBackground": "#558fca",
+        "titleBar.activeForeground": "#e7e7e7",
+        "titleBar.inactiveBackground": "#7255ca99",
+        "titleBar.inactiveForeground": "#e7e7e799"
+    }
 }

@@ -26,9 +26,8 @@
 /* Email components */
 @import './apps/mail/cmps/email-filter.css';
 @import './apps/mail/cmps/email-list.css';
+<<<<<<< HEAD
 @import './apps/mail/cmps/email-preview.css';
-@import './apps/mail/cmps/email-folder-list.css';
-@import './apps/mail/cmps/email-compose.css';
 
 
 
@@ -39,3 +38,8 @@
 /* Notes Cmps */
 @import './apps/note/cmps/note-preview.css';
 @import './apps/note/cmps/note-list.css';
+=======
+@import './apps/mail/cmps/email-folder-list.css';
+@import './apps/mail/cmps/email-preview.css';
+@import './apps/mail/cmps/email-compose.css';
+>>>>>>> 9cbd6053954a4845a81ff28bb634e318bf3ac6f0
