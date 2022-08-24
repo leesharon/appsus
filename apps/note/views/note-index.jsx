@@ -76,7 +76,7 @@ export class NoteIndex extends React.Component {
         console.log(pinnedNotes, unPinnedNotes)
 
         return (
-            <main>
+            <main className="full">
                 {chosenNote && <NoteDetails noteId={chosenNote.id} onEditNote={onEditNote} />}
                 <NoteCompose onNewNote={onNewNote} />
                 <NoteList notes={pinnedNotes} onChoseNote={onChoseNote} onPinNote={onPinNote} onRemoveNote={onRemoveNote} />
