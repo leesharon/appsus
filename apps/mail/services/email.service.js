@@ -97,12 +97,13 @@ function _createEmails(num) {
 function _createEmail() {
   return {
     id: utilService.makeId(),
-    subject: utilService.makeLorem(2),
-    body: utilService.makeLorem(5),
+    subject: utilService.makeLorem(3),
+    body: utilService.makeLorem(10),
     isRead: false,
     status: null,
     sentAt: 1551133930594,
-    to: utilService.getRandomIntInclusive(0, 1) ? 'momo@momo.com' : 'user@appsus.com'
+    to: utilService.getRandomIntInclusive(0, 1) ? 'momo@momo.com' : 'user@appsus.com',
+    from: 'google@gmail.com'  
   }
 }
 

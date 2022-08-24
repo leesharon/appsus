@@ -13,7 +13,7 @@
 @import './views/home.css';
 
 /* Email Views */
-@import './apps/mail/views/email-app.css';
+@import './apps/mail/views/email-index.css';
 
 /* Note Views */
 @import './apps/note/views/note-app.css';
