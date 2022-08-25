@@ -6,6 +6,28 @@
     background-color: #5f636857;
 }
 
+.todo-list {
+    width: 100%;
+}
+
+.todo-list li .todo-check {
+    width: 20px;
+}
+.todo-list li .todo-txt {
+    max-width:70%;
+    overflow-wrap: break-word;
+}
+.note p {
+    max-width:90%;
+    overflow-wrap: break-word;
+}
+
+.todo-list>li {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+}
 
 .edit-note-btns-container>button {
     border: none;
@@ -30,7 +52,7 @@
 
 .edit-note form input {
     background-color: transparent;
-    border:none;
+    border: none;
     width: 100%;
     height: 30px;
     font-size: 1.5em;
@@ -38,7 +60,7 @@
 
 .edit-note form textarea {
     background-color: transparent;
-    border:none;
+    border: none;
     width: 100%;
     height: 200px;
     resize: none;

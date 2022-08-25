@@ -57,7 +57,6 @@ function removeNote(noteId) {
 }
 
 function createNote(type, content) {
-    console.log(content)
     let newNote
     switch (type) {
         case ('txt'):
@@ -77,6 +76,7 @@ function createNote(type, content) {
     const notes = _loadNotesFromStorage()
     notes.unshift(newNote)
     _saveNotesToStorage(notes)
+    console.log(newNote)
     return Promise.resolve(newNote)
 }
 
@@ -147,13 +147,16 @@ function _createYtNote({ title, videoLink }) {
 }
 
 function _createTodosNote({ title, todos }) {
+    todos = todos.map((todo) => (todo) ? { txt: todo, doneAt: null } : null)
+    todos = todos.filter(todo => (todo !== null))
+
     return {
         id: utilService.makeId(),
         type: 'note-todos',
         isPinned: false,
         info: {
             title,
-            todos: todos.map((todo) => { if (todo) return { txt: todo, doneAt: null } })
+            todos
         },
         style: {
             backgroundColor: 'white'

@@ -1,4 +1,5 @@
 import { eventBusService } from "../../../services/event-bus.service.js";
+import { utilService } from "../../../services/util.service.js";
 import { noteService } from "../services/note.service.js";
 import { NoteButtons } from "./note-buttons.jsx";
 
@@ -22,12 +23,8 @@ export class NoteDetails extends React.Component {
                             value={title}
                             onChange={onEditText}
                         />
-                        <textarea
-                            type="text"
-                            name="txt"
-                            value={txt}
-                            onChange={onEditText}
-                        />
+
+                        <_NoteContent note={note} onEditText={onEditText} />
                     </form>
                     <section className="edit-note-btns-container">
                         <button onClick={onSaveChanges}>Save changes</button>
@@ -40,4 +37,47 @@ export class NoteDetails extends React.Component {
 
         )
     }
+}
+
+function _NoteContent({ note, onEditText }) {
+    switch (note.type) {
+        case ('note-txt'):
+            return (
+                <textarea
+                    type="text"
+                    name="txt"
+                    value={note.info.txt}
+                    onChange={onEditText}
+                />
+            )
+        case ('note-img'):
+            return (
+                <img src={note.info.imgUrl}>
+
+                </img>
+            )
+        case ('note-video'):
+            return (
+                <iframe src={note.info.videoLink}>
+
+                </iframe>
+            )
+        case ('note-todos'):
+            return (
+                <ul className="todo-list">
+                    {note.info.todos.map((todo) => {
+                        return (
+                            <li key={utilService.makeId()}>
+                                <p>{todo.txt}</p>
+                                <input className="todo-check" type="checkbox"
+                                    value={todo.DoneAt}
+                                />
+                            </li>
+                        )
+                    })}
+                </ul>
+            )
+
+    }
+
 }
