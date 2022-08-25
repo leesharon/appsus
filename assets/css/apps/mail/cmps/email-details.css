@@ -1,12 +1,22 @@
 
 tr.email-details {
     position: relative;
+    background-color: #595959;
+    color: white;
+}
+
+.email-details td {
+    padding: 20px;
+}
+
+.email-details .email-heading {
+    margin-bottom: 12px;
 }
 
 .email-details i.remove-email {
     position: absolute;
-    right: 10px;
-    top: 10px;
+    right: 20px;
+    top: 20px;
 }
 
 .email-details i.remove-email:hover {

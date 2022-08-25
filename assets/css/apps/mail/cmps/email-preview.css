@@ -1,4 +1,13 @@
 
+.email-preview {
+    color: #B9B9B9;
+}
+
+.email-preview.unread {
+    background-color: #2C2C2C;
+}
+
 .email-preview td.unread {
     color: white;
+    font-family: 'open-sans-bold';
 }

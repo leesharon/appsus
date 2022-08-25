@@ -5,6 +5,7 @@
 
 .email-side-bar .compose {
     margin-bottom: 50px;
+    margin-inline-start: 5px;
     width: 100px;
     height: 40px;
     display: flex;

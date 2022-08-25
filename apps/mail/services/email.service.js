@@ -13,7 +13,7 @@ export const emailService = {
 }
 
 const KEY = 'emailsDB'
-const gEmails = _createEmails(20)
+const gEmails = _createEmails(50)
 const gLoggedInUser = {
   email: 'user@appsus.com',
   fullName: 'Mahatma Appsus'
@@ -59,6 +59,14 @@ function query(filterBy) {
 
         case 'trash':
           emails = emails.filter(email => email.status === 'trash')
+          break;
+
+        case 'unread':
+          emails = emails.filter(email => email.isRead === false)
+          break;
+
+        case 'read':
+          emails = emails.filter(email => email.isRead === true)
           break;
       }
     }
@@ -107,7 +115,7 @@ function toggleIsRead(emailId, isRead) {
   emails[emailIdx].isRead = true
 
   _saveToStorage(emails)
-  return Promise.resolve(emails)
+  return Promise.resolve()
 }
 
 function add(to, subject, body) {
@@ -115,7 +123,7 @@ function add(to, subject, body) {
   let emails = _loadFromStorage()
   emails.unshift(email)
   _saveToStorage(emails)
-  return Promise.resolve(emails)
+  return Promise.resolve(email)
 }
 
 function _createEmails(num) {
@@ -132,9 +140,9 @@ function _createEmail(to, subject, body) {
     id: utilService.makeId(),
     subject: subject || utilService.makeLorem(3),
     body: body || utilService.makeLorem(10),
-    isRead: false,
+    isRead: utilService.getRandomIntInclusive(0, 2),
     status: null,
-    sentAt: 1551133930594,
+    sentAt: Date.now(),
     to: to || (utilService.getRandomIntInclusive(0, 1) ? 'momo@momo.com' : 'user@appsus.com'),
     from: 'google@gmail.com'  
   }

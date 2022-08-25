@@ -1,10 +1,30 @@
 .folder-list {
     display: flex;
     flex-direction: column;
-    gap: 32px;
     flex-basis: 10%;
     margin-top: 13px;
     margin-inline-start: 5px;
+}
+
+.folder-list a {
+    display: flex;
+    align-items: center;
+    height: 32px;
+    width: 200px;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    padding-inline-start: 10px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    transition: background-color .3s;
+}
+
+.folder-list a:hover {
+    background-color: #414141;
+}
+
+.folder-list a.active {
+    background-color: #595959;
 }
 
 .folder-list li:hover {

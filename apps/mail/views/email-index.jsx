@@ -13,7 +13,11 @@ export class EmailIndex extends React.Component {
         filterBy: {
             folder: 'inbox'
         },
-        isModalOpened: false
+        isModalOpened: false,
+        sortBy: {
+            isDateDesc: 1,
+            isSubjDesc: 1
+        }
     }
 
     componentDidMount() {
@@ -74,9 +78,35 @@ export class EmailIndex extends React.Component {
         }), () => this.loadEmails())
     }
 
+    onSetSortBy = (sortBy) => {
+        const {emails} = this.state
+        const { isSubjDesc, isDateDesc} = this.state.sortBy
+        if (sortBy === 'subject') {
+            emails.sort((a, b) => a.subject.toLowerCase().localeCompare(b.subject.toLowerCase()) * isSubjDesc)
+            this.setState(({sortBy}) => ({ emails, sortBy: {
+                ...sortBy,
+                isSubjDesc: sortBy.isSubjDesc * -1
+            } }))
+            
+
+        } else if (sortBy === 'date') {
+            emails.sort((a, b) => (a - b) * isDateDesc )
+            this.setState(({sortBy}) => ({ emails, sortBy: {
+                ...sortBy,
+                isSubjDesc: sortBy.isDateDesc * -1
+            } }))
+        }
+    }
+
     composeEmail = ({ to, subject, body }) => {
         emailService.add(to, subject, body)
-            .then(emails => this.setState({ emails }))
+            .then((email) => {
+                if (this.state.filterBy.folder === 'sent') {
+                    const {emails} = this.state
+                    emails.unshift(email)
+                    this.setState({ emails })
+                }
+            })
     }
 
     toggleModal = () => {
@@ -95,11 +125,18 @@ export class EmailIndex extends React.Component {
 
     onToggleIsRead = (emailId, isRead) => {
         emailService.toggleIsRead(emailId, isRead)
+            .then(() => {
+                let {emails} = this.state
+                const emailIdx = emails.findIndex(email => email.id === emailId)
+                emails[emailIdx].isRead = true
+                this.setState({ emails })
+            })
     }
 
     render() {
         const { emails, loggedInUser, isModalOpened } = this.state
         const { onToggleIsRead,
+            onSetSortBy,
             onSetSearchFilter,
             toggleModal,
             onRemoveEmail,
@@ -118,6 +155,7 @@ export class EmailIndex extends React.Component {
                     emails={emails}
                     setStar={setStar}
                     onToggleIsRead={onToggleIsRead}
+                    onSetSortBy={onSetSortBy}
                 />
             </div>
             <ModalCompose

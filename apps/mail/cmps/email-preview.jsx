@@ -20,16 +20,15 @@ export class EmailPreview extends React.Component {
     render() {
         const { email, onRemoveEmail, loggedInUser, setStar } = this.props
         const { isShown } = this.state
-        const fontColor = email.isRead ? '' : 'unread'
+        const unreadClass = email.isRead ? '' : 'unread'
         const sentAt = utilService.getDatePreview(email.sentAt, true)
-        const shortEmailBody = utilService.trimString(email.body)
 
         return <React.Fragment>
-            < tr onClick={() => {this.onShowEmail(email.id)}} className="email-preview" >
+            < tr onClick={() => {this.onShowEmail(email.id)}} className={`email-preview ${unreadClass}`} >
                 <td onClick={this.stopPropagation}><Rate setStar={setStar} email={email} /></td>
-                <td className={fontColor} colSpan="2">{email.to}</td>
-                <td className={fontColor} colSpan="10">{shortEmailBody}</td>
-                <td className={fontColor}>{sentAt}</td>
+                <td className={unreadClass} colSpan="2">{email.to}</td>
+                <td className={unreadClass} colSpan="10">{email.subject}</td>
+                <td className={unreadClass}>{sentAt}</td>
             </tr >
             {isShown && <EmailDetails onRemoveEmail={onRemoveEmail} email={email} />}
         </React.Fragment>
