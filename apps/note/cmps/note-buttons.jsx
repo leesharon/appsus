@@ -47,7 +47,7 @@ export class NoteButtons extends React.Component {
 
             <React.Fragment>
                 <button onClick={onSendNoteAsEmail}>
-                    Send as Email
+                <i className="fa-solid fa-at"></i>
                 </button>
                 <button onClick={() => { onRemoveNote(noteId) }}>
                     <i className="fa-solid fa-trash-can"></i>
