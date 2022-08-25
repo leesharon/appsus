@@ -1,14 +1,12 @@
 import { NoteButtons } from "./note-buttons.jsx";
 import { NotePreview } from "./note-preview.jsx";
-const { withRouter } = ReactRouterDOM
 
-class _NoteList extends React.Component {
+export class NoteList extends React.Component {
 
 
 
     render() {
-        const { notes, onChoseNote, onRemoveNote, onPinNote,onChangeNoteColor } = this.props
-        const { onOpenEdit } = this
+        const { notes, onChoseNote, onRemoveNote, onPinNote, onChangeNoteColor } = this.props
         if (!notes) return <h1>loading</h1>
         return (
             <section className="notes-container">
@@ -21,7 +19,8 @@ class _NoteList extends React.Component {
                                 <button onClick={() => onChoseNote(note)}>
                                     <i className="fa-solid fa-pen"></i>
                                 </button>
-                                <NoteButtons onChangeNoteColor={onChangeNoteColor} onRemoveNote={onRemoveNote} onPinNote={onPinNote} noteId={note.id} />
+                                <NoteButtons onChangeNoteColor={onChangeNoteColor} onRemoveNote={onRemoveNote}
+                                    onPinNote={onPinNote} noteId={note.id} />
                             </section>
                         </article>
 
@@ -31,5 +30,3 @@ class _NoteList extends React.Component {
         )
     }
 }
-
-export const NoteList = withRouter(_NoteList)

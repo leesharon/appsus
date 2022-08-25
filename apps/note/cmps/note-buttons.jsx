@@ -21,9 +21,6 @@ export class NoteButtons extends React.Component {
     onChangePinned = () => {
         this.setState({ isPinned: !this.state.isPinned })
         this.props.onPinNote(this.props.noteId)
-
-
-
     }
 
     toggleColorPalette = () => {
@@ -33,6 +30,7 @@ export class NoteButtons extends React.Component {
     onColorSelect = (color) => {
         const { onChangeNoteColor, noteId } = this.props
         onChangeNoteColor(noteId, color)
+        this.setState({ isColorPaletteOpen: false })
     }
     render() {
         const { noteId, onRemoveNote } = this.props

@@ -1,19 +1,19 @@
 import { eventBusService } from "../../../services/event-bus.service.js";
 import { noteService } from "../services/note.service.js";
+import { NoteButtons } from "./note-buttons.jsx";
 
 
 export class NoteDetails extends React.Component {
 
-    state = {
-        note: null,
-    }
+    // state = {
+    //     note: null,
+    // }
 
-    inputRef = React.createRef()
+    // inputRef = React.createRef()
 
-    componentDidMount() {
-        this.loadNote()
-        // console.log(this.inputRef)
-    }
+    // componentDidMount() {
+    //     this.loadNote()
+    // }
 
     onHandleChange = ({ target: { name, value } }) => {
         this.setState((prevState) => ({
@@ -22,8 +22,6 @@ export class NoteDetails extends React.Component {
                 info: { ...prevState.note.info, [name]: value }
             }
         }))
-
-
     }
 
     onSaveChanges = () => {
@@ -31,22 +29,23 @@ export class NoteDetails extends React.Component {
         this.props.onEditNote(newNote)
     }
 
+    // loadNote = () => {
+    //     const { noteId } = this.props
+    //     noteService.getById(noteId)
+    //         .then((note) => this.setState({ note }))
 
-    loadNote = () => {
-        const { noteId } = this.props
-        noteService.getById(noteId)
-            .then((note) => this.setState({ note }))
 
-
-    }
+    // }
 
     render() {
-        const { note } = this.state
-        if (!note) return
+        // const { note } = this.state
+        // if (!note) return
         const { onHandleChange, onSaveChanges } = this
+        const { onRemoveNote, onPinNote, onChangeNoteColor,note } = this.props
         const { title, txt } = note.info
+        const { backgroundColor } = note.style
         return (
-            <article>
+            <article className={"edit-note " + backgroundColor}>
                 <input
                     type="text"
                     name="title"
@@ -58,9 +57,13 @@ export class NoteDetails extends React.Component {
                     name="txt"
                     value={txt}
                     onChange={onHandleChange}
-                    ref={this.inputRef}
                 />
-                <button onClick={onSaveChanges}>Save changes</button>
+                <section className="edit-note-btns-container">
+                    <button onClick={onSaveChanges}>Save changes</button>
+                    <NoteButtons onChangeNoteColor={onChangeNoteColor} onRemoveNote={onRemoveNote}
+                        onPinNote={onPinNote} noteId={note.id} />
+                </section>
+
             </article>
         )
     }

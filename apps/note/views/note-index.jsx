@@ -32,13 +32,11 @@ export class NoteIndex extends React.Component {
 
     onEditNote = (newNote) => {
         noteService.EditNote(newNote)
-            .then(this.loadNotes())
-        // noteService.EditNote(newNote)
-        //     .then((newNoteFromService) => {
-        //         const notes = this.state.notes
-        //         const newNotes = notes.map((note) => (note.id === newNoteFromService.id) ? newNoteFromService : note)
-        //         this.setState({ notes: newNotes })
-        //     })
+            .then((newNoteFromService) => {
+                const notes = this.state.notes
+                const newNotes = notes.map((note) => (note.id === newNoteFromService.id) ? newNoteFromService : note)
+                this.setState({ notes: newNotes, chosenNote: null })
+            })
     }
 
     onChoseNote = (note) => {
@@ -55,6 +53,7 @@ export class NoteIndex extends React.Component {
             )
 
     }
+
 
     onPinNote = (noteId) => {
         noteService.pinNote(noteId).then(() => {
@@ -84,11 +83,14 @@ export class NoteIndex extends React.Component {
         const unPinnedNotes = notes.filter((note) => !note.isPinned)
 
         return (
-            <main className="full">
-                {chosenNote && <NoteDetails noteId={chosenNote.id} onEditNote={onEditNote} />}
+            <main className="main-note-app full">
+                {chosenNote && <NoteDetails note={chosenNote} onEditNote={onEditNote} onPinNote={onPinNote}
+                    onChangeNoteColor={onChangeNoteColor} onRemoveNote={onRemoveNote} />}
                 <NoteCompose onNewNote={onNewNote} />
-                <NoteList notes={pinnedNotes} onChangeNoteColor={onChangeNoteColor} onChoseNote={onChoseNote} onPinNote={onPinNote} onRemoveNote={onRemoveNote} />
-                <NoteList notes={unPinnedNotes} onChangeNoteColor={onChangeNoteColor} onChoseNote={onChoseNote} onPinNote={onPinNote} onRemoveNote={onRemoveNote} />
+                {pinnedNotes.length > 0 && <NoteList notes={pinnedNotes} onChangeNoteColor={onChangeNoteColor}
+                    onChoseNote={onChoseNote} onPinNote={onPinNote} onRemoveNote={onRemoveNote} />}
+                {unPinnedNotes.length > 0 && <NoteList notes={unPinnedNotes} onChangeNoteColor={onChangeNoteColor}
+                    onChoseNote={onChoseNote} onPinNote={onPinNote} onRemoveNote={onRemoveNote} />}
             </main>
         )
     }

@@ -1,9 +1,31 @@
+.button-list button {
+    border: none;
+    background-color: transparent;
+}
+
+.button-list {
+    width: inherit;
+    display: flex;
+    justify-content: space-evenly;
+    opacity: 0;
+    transition: 0.3s;
+}
+
+
+
+
 [name=pin-box] {
     display: none;
 }
 
 .pin-box-label i {
     font-size: 22px;
+}
+
+.pin-box-label {
+    position: absolute;
+    top: 5px;
+    right: 5px;
 }
 
 .pin-box-label.pinned i {
@@ -19,8 +41,13 @@
 }
 
 .color-btns-container {
-    position:absolute;
-    width:inherit;
+    border-radius: 8px;
+    z-index: 100;
+    position: absolute;
+    width: inherit;
+    bottom: -43px;
+    background-color: white;
+    box-shadow: inset 1px 1px 0 rgb(0 0 0 / 10%), inset 0 -1px 0 rgb(0 0 0 / 7%);
 }
 
 .color-btn {

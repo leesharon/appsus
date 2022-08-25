@@ -16,7 +16,8 @@ export class NoteCompose extends React.Component {
         this.setState((prevState) => ({ info: { ...prevState.info, [name]: value } }))
     }
 
-    onSubmit = () => {
+    onSubmit = (ev) => {
+        ev.preventDefault()
         const { info, type } = this.state
         const newNotePrm = noteService.createNote(type, info)
         this.props.onNewNote(newNotePrm)
@@ -27,27 +28,43 @@ export class NoteCompose extends React.Component {
         const { title, txt } = info
         const { onHandleChange, onSubmit } = this
         return (
-            <section>
+            <section className="note-compose">
+                <form onSubmit={onSubmit}>
+                    <input
+                        type="text"
+                        name="title"
+                        value={title}
+                        onChange={onHandleChange}
+                        placeholder="Note title"
+                    />
+                    <textarea
+                    width="70%"
+                        type="text"
+                        name="txt"
+                        value={txt}
+                        onChange={onHandleChange}
+                        placeholder="Whats on your mind?"
+                    />
+                </form>
+                <section className="change-type-btns-container">
+                    <button onClick={onSubmit}>
+                        <i className="fa-solid fa-file-arrow-up"></i>
+                    </button>
+                    <button >
+                        <i className="fa-solid fa-image"></i>
+                    </button>
+                    <button>
+                        <i className="fa-solid fa-list-check"></i>
+                    </button>
 
-                <input
-                    type="text"
-                    name="title"
-                    value={title}
-                    onChange={onHandleChange}
-                    placeholder="Note title"
-                />
-                <input
-                    type="text"
-                    name="txt"
-                    value={txt}
-                    onChange={onHandleChange}
-                    placeholder="Whats on your mind?"
-                />
-                <button onClick={onSubmit}>save!</button>
-                <button>img</button>
-                <button>todos</button>
-                <button>video</button>
-                <button>text</button>
+                    <button>
+                        <i className="fa-brands fa-youtube"></i>
+                    </button>
+                    <button>
+                        T
+                    </button>
+                </section>
+
             </section>
         )
     }

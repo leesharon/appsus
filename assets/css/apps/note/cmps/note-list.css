@@ -1,6 +1,7 @@
 .notes-container {
     max-width: 1060px;
-    columns:  4;
+    columns: 4 250px;
     column-gap: 0.5em;
-    padding-bottom:50px;
+    padding-bottom: 20px;
+    padding-top:20px;
 }
