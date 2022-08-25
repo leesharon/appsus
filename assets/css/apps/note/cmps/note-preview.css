@@ -3,8 +3,24 @@
     margin-bottom: 10px;
     padding: 5px;
     break-inside: avoid-column;
-    border-radius: 5%;
+    border-radius: 8px;
+    box-sizing: border-box;
+    position: relative;
+    border: lightgrey .5px solid;
 }
+
+.note:hover .button-list {
+    opacity: 1;
+    transition: 0.4s;
+}
+
+.note:hover {
+    box-sizing: border-box;
+    box-shadow: inset 1px 1px 0 rgb(0 0 0 / 10%), inset 0 -1px 0 rgb(0 0 0 / 7%);
+}
+
+/* border:lightgrey 1.5px solid; */
+
 
 .note.white {
     background-color: white;

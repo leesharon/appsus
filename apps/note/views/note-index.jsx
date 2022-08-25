@@ -32,13 +32,11 @@ export class NoteIndex extends React.Component {
 
     onEditNote = (newNote) => {
         noteService.EditNote(newNote)
-            .then(this.loadNotes())
-        // noteService.EditNote(newNote)
-        //     .then((newNoteFromService) => {
-        //         const notes = this.state.notes
-        //         const newNotes = notes.map((note) => (note.id === newNoteFromService.id) ? newNoteFromService : note)
-        //         this.setState({ notes: newNotes })
-        //     })
+            .then((newNoteFromService) => {
+                const notes = this.state.notes
+                const newNotes = notes.map((note) => (note.id === newNoteFromService.id) ? newNoteFromService : note)
+                this.setState({ notes: newNotes, chosenNote: null })
+            })
     }
 
     onChoseNote = (note) => {
@@ -55,6 +53,44 @@ export class NoteIndex extends React.Component {
             )
 
     }
+
+    onEditText = ({ target }) => {
+        const { name, value } = target
+        this.setState((prevState) => ({
+            chosenNote: {
+                ...prevState.chosenNote,
+                info: { ...prevState.chosenNote.info, [name]: value }
+            }
+        }))
+    }
+
+    onEditColor = (noteId, color) => {
+        this.setState((prevState) => ({
+            chosenNote: {
+                ...prevState.chosenNote,
+                style: { backgroundColor: color }
+            }
+        }))
+    }
+
+    onEditPin = (noteId) => {
+        this.setState((prevState) =>
+        ({
+            chosenNote:
+            {
+                ...prevState.chosenNote,
+                isPinned: !prevState.chosenNote.isPinned
+            }
+        }))
+    }
+
+    onSaveChanges = () => {
+        const newNote = this.state.chosenNote
+        this.onEditNote(newNote)
+        this.setState({ chosenNote: null })
+    }
+
+
 
     onPinNote = (noteId) => {
         noteService.pinNote(noteId).then(() => {
@@ -79,16 +115,24 @@ export class NoteIndex extends React.Component {
     render() {
         const { notes, chosenNote } = this.state
         if (!notes) return <h1>loading from index</h1>
-        const { onNewNote, onEditNote, onChoseNote, onRemoveNote, onPinNote, onChangeNoteColor } = this
+        const { onNewNote, onEditNote, onChoseNote, onSaveChanges, onRemoveNote,
+            onPinNote, onChangeNoteColor, onEditText, onEditColor,onEditPin } = this
         const pinnedNotes = notes.filter((note) => note.isPinned)
         const unPinnedNotes = notes.filter((note) => !note.isPinned)
 
         return (
-            <main className="full">
-                {chosenNote && <NoteDetails noteId={chosenNote.id} onEditNote={onEditNote} />}
+            <main className="main-note-app full">
+                {chosenNote && <NoteDetails onSaveChanges={onSaveChanges} onEditText={onEditText}
+                    note={chosenNote} onEditNote={onEditNote} onPinNote={onEditPin}
+                    onChangeNoteColor={onEditColor} onRemoveNote={onRemoveNote} />}
+                    
                 <NoteCompose onNewNote={onNewNote} />
-                <NoteList notes={pinnedNotes} onChangeNoteColor={onChangeNoteColor} onChoseNote={onChoseNote} onPinNote={onPinNote} onRemoveNote={onRemoveNote} />
-                <NoteList notes={unPinnedNotes} onChangeNoteColor={onChangeNoteColor} onChoseNote={onChoseNote} onPinNote={onPinNote} onRemoveNote={onRemoveNote} />
+
+                {pinnedNotes.length > 0 && <NoteList notes={pinnedNotes} onChangeNoteColor={onChangeNoteColor}
+                    onChoseNote={onChoseNote} onPinNote={onPinNote} onRemoveNote={onRemoveNote} />}
+
+                {unPinnedNotes.length > 0 && <NoteList notes={unPinnedNotes} onChangeNoteColor={onChangeNoteColor}
+                    onChoseNote={onChoseNote} onPinNote={onPinNote} onRemoveNote={onRemoveNote} />}
             </main>
         )
     }

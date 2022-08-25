@@ -1,33 +1,19 @@
 
-export class NotePreview extends React.Component {
+export function NotePreview({ note }) {
 
-    state = {
-        note: null
-    }
-    componentDidMount() {
-        this.setState({ note: this.props.note })
-    }
-
-
-    DynamicCmp = (note) => {
-        switch (this.state.note.type) {
+    function DynamicCmp() {
+        switch (note.type) {
             case ('note-txt'):
                 return TxtNote(note)
         }
     }
+    return (
+        <DynamicCmp />
+    )
 
-    render() {
-        const { note } = this.state
-        const { DynamicCmp } = this
-        if (!note) return <h1>loading</h1>
-        return (
-            <DynamicCmp note={note} />
-        )
-    }
 }
 
-function TxtNote({ note }) {
-    const { title, txt } = note.info
+function TxtNote({ info: { title, txt } }) {
     return (
         <div>
             <h3>{title}</h3>

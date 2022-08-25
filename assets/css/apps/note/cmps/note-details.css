@@ -1,0 +1,49 @@
+.black-screen {
+    height: 100vh;
+    width: 100vw;
+    position: absolute;
+    z-index: 70;
+    background-color: #5f636857;
+}
+
+
+
+.edit-note {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 80;
+    position: fixed;
+    right:50%;
+    bottom:50%;
+    transform:translate(50%,50%);
+    width:60%;
+}
+
+.edit-note.white {
+    background-color: white;
+}
+
+.edit-note.plum {
+    background-color: plum;
+}
+
+.edit-note.lightgreen {
+    background-color: lightgreen;
+}
+
+.edit-note.lightcoral {
+    background-color: lightcoral;
+}
+
+.edit-note.slateblue {
+    background-color: slateblue;
+}
+
+.edit-note.lightskyblue {
+    background-color: lightskyblue;
+}
+
+.edit-note.peru {
+    background-color: peru;
+}
