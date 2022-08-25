@@ -1,3 +1,4 @@
+import { eventBusService } from "../../../services/event-bus.service.js";
 import { noteService } from "../services/note.service.js";
 
 
@@ -32,14 +33,22 @@ export class NoteButtons extends React.Component {
         onChangeNoteColor(noteId, color)
         this.setState({ isColorPaletteOpen: false })
     }
+
+    onSendNoteAsEmail = () => {
+        const {note} = this.props
+        eventBusService.emit('note-to-email',note.info)
+    }
     render() {
         const { noteId, onRemoveNote } = this.props
         const { isPinned, isColorPaletteOpen } = this.state
-        const { onChangePinned, toggleColorPalette, onColorSelect } = this
+        const { onChangePinned, toggleColorPalette, onColorSelect,onSendNoteAsEmail } = this
         const labelClassName = (isPinned) ? 'pinned' : 'unpinned'
         return (
 
             <React.Fragment>
+                <button onClick={onSendNoteAsEmail}>
+                    Send as Email
+                </button>
                 <button onClick={() => { onRemoveNote(noteId) }}>
                     <i className="fa-solid fa-trash-can"></i>
                 </button>

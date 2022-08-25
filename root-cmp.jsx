@@ -3,11 +3,18 @@ import { About } from "./views/about.jsx"
 import { Home } from "./views/home.jsx"
 import { NoteIndex } from "./apps/note/views/note-index.jsx"
 import { EmailIndex } from "./apps/mail/views/email-index.jsx"
+import { eventBusService } from "./services/event-bus.service.js"
+import { noteService } from "./apps/note/services/note.service.js"
 
 const Router = ReactRouterDOM.HashRouter
 const { Route, Switch } = ReactRouterDOM
 
 export function App() {
+
+    eventBusService.on('mail-to-note', (mail) => {
+        noteService.createNote('txt', mail)
+    })
+
     return <Router>
         <section className="app main-layout">
             <AppHeader />

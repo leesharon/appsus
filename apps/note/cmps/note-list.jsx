@@ -20,7 +20,7 @@ export class NoteList extends React.Component {
                                     <i className="fa-solid fa-pen"></i>
                                 </button>
                                 <NoteButtons onChangeNoteColor={onChangeNoteColor} onRemoveNote={onRemoveNote}
-                                    onPinNote={onPinNote} noteId={note.id} />
+                                    onPinNote={onPinNote} noteId={note.id} note={note}/>
                             </section>
                         </article>
 

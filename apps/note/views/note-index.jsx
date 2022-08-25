@@ -117,6 +117,10 @@ export class NoteIndex extends React.Component {
             )
     }
 
+    // onSendAsMail = () => {
+    //     noteService.getById()
+    // }
+
 
     render() {
         const { notes, chosenNote } = this.state
