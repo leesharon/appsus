@@ -28,8 +28,11 @@
 @import './apps/mail/cmps/email-side-bar.css';
 @import './apps/mail/cmps/email-list.css';
 @import './apps/mail/cmps/email-preview.css';
+@import './apps/mail/cmps/email-details.css';
 @import './apps/mail/cmps/email-folder-list.css';
 @import './apps/mail/cmps/email-compose.css';
+@import './apps/mail/cmps/modal-compose.css';
+@import './apps/mail/cmps/rate.css';
 
 
 

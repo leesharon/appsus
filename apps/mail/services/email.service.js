@@ -6,7 +6,10 @@ export const emailService = {
   getById,
   remove,
   getNextEmailId,
-  getLoggedInUser
+  getLoggedInUser,
+  add,
+  setEmailStatus,
+  toggleIsRead
 }
 
 const KEY = 'emailsDB'
@@ -64,9 +67,22 @@ function query(filterBy) {
   return Promise.resolve(emails)
 }
 
+function setEmailStatus(emailId, status) {
+  let emails = _loadFromStorage()
+  const emailIdx = emails.findIndex(email => email.id === emailId)
+  emails[emailIdx].status = (emails[emailIdx].status === status) ? null : status
+  _saveToStorage(emails)
+  return Promise.resolve()
+}
+
 function remove(emailId) {
   let emails = _loadFromStorage()
-  emails = emails.filter(email => email.id !== emailId)
+  const emailIdx = emails.findIndex(email => email.id === emailId)
+  emails[emailIdx].status = (emails[emailIdx].status !== 'trash') ? 'trash' : 'remove'
+  
+  if (emails[emailIdx].status === 'remove') {
+    emails = emails.filter(email => email.id !== emailId)
+  }
   _saveToStorage(emails)
   return Promise.resolve()
 }
@@ -85,6 +101,23 @@ function getById(emailId) {
   return Promise.resolve(email)
 }
 
+function toggleIsRead(emailId, isRead) {
+  let emails = _loadFromStorage()
+  const emailIdx = emails.findIndex(email => email.id === emailId)
+  emails[emailIdx].isRead = true
+
+  _saveToStorage(emails)
+  return Promise.resolve(emails)
+}
+
+function add(to, subject, body) {
+  const email = _createEmail(to, subject, body)
+  let emails = _loadFromStorage()
+  emails.unshift(email)
+  _saveToStorage(emails)
+  return Promise.resolve(emails)
+}
+
 function _createEmails(num) {
   const emails = []
   for (let i = 0; i < num; i++) {
@@ -94,15 +127,15 @@ function _createEmails(num) {
   return emails
 }
 
-function _createEmail() {
+function _createEmail(to, subject, body) {
   return {
     id: utilService.makeId(),
-    subject: utilService.makeLorem(3),
-    body: utilService.makeLorem(10),
+    subject: subject || utilService.makeLorem(3),
+    body: body || utilService.makeLorem(10),
     isRead: false,
     status: null,
     sentAt: 1551133930594,
-    to: utilService.getRandomIntInclusive(0, 1) ? 'momo@momo.com' : 'user@appsus.com',
+    to: to || (utilService.getRandomIntInclusive(0, 1) ? 'momo@momo.com' : 'user@appsus.com'),
     from: 'google@gmail.com'  
   }
 }

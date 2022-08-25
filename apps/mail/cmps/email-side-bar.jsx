@@ -1,11 +1,10 @@
 import { EmailFolderList } from "./email-folder-list.jsx";
 
-
-export function EmailSideBar() {
-
+export function EmailSideBar({ toggleModal }) {
+    
     return <div className="email-side-bar">
-        <div className="compose">
-            <i class="fa-solid fa-pencil"></i>&nbsp;
+        <div onClick={toggleModal} className="compose">
+            <i className="fa-solid fa-pencil"></i>&nbsp;
             Compose
         </div>
         <EmailFolderList />
