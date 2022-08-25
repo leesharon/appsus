@@ -1,4 +1,5 @@
 
+import { noteService } from "../../note/services/note.service.js"
 import { EmailFilter } from "../cmps/email-filter.jsx"
 import { EmailList } from "../cmps/email-list.jsx"
 import { EmailSideBar } from "../cmps/email-side-bar.jsx"
@@ -17,11 +18,13 @@ export class EmailIndex extends React.Component {
         sortBy: {
             isDateDesc: 1,
             isSubjDesc: 1
-        }
+        },
+        savedNote: null
     }
 
     componentDidMount() {
-        const { folder } = this.props.match.params
+        const { folder, noteId } = this.props.match.params
+        if (noteId) this.getNote(noteId)
         this.setState((prevState) => ({
             filterBy: {
                 ...prevState.filterBy,
@@ -30,6 +33,12 @@ export class EmailIndex extends React.Component {
         }), () => this.loadEmails())
         this.loadUser()
     }
+
+    getNote = (noteId) => {
+        noteService.getById(noteId)
+            .then((note) => { this.setState({ savedNote: note }) })
+    }
+
 
     componentDidUpdate(prevProps) {
         if (prevProps.match.params.folder !== this.props.match.params.folder) {
@@ -79,22 +88,26 @@ export class EmailIndex extends React.Component {
     }
 
     onSetSortBy = (sortBy) => {
-        const {emails} = this.state
-        const { isSubjDesc, isDateDesc} = this.state.sortBy
+        const { emails } = this.state
+        const { isSubjDesc, isDateDesc } = this.state.sortBy
         if (sortBy === 'subject') {
             emails.sort((a, b) => a.subject.toLowerCase().localeCompare(b.subject.toLowerCase()) * isSubjDesc)
-            this.setState(({sortBy}) => ({ emails, sortBy: {
-                ...sortBy,
-                isSubjDesc: sortBy.isSubjDesc * -1
-            } }))
-            
+            this.setState(({ sortBy }) => ({
+                emails, sortBy: {
+                    ...sortBy,
+                    isSubjDesc: sortBy.isSubjDesc * -1
+                }
+            }))
+
 
         } else if (sortBy === 'date') {
-            emails.sort((a, b) => (a - b) * isDateDesc )
-            this.setState(({sortBy}) => ({ emails, sortBy: {
-                ...sortBy,
-                isSubjDesc: sortBy.isDateDesc * -1
-            } }))
+            emails.sort((a, b) => (a - b) * isDateDesc)
+            this.setState(({ sortBy }) => ({
+                emails, sortBy: {
+                    ...sortBy,
+                    isSubjDesc: sortBy.isDateDesc * -1
+                }
+            }))
         }
     }
 
@@ -102,7 +115,7 @@ export class EmailIndex extends React.Component {
         emailService.add(to, subject, body)
             .then((email) => {
                 if (this.state.filterBy.folder === 'sent') {
-                    const {emails} = this.state
+                    const { emails } = this.state
                     emails.unshift(email)
                     this.setState({ emails })
                 }
@@ -126,7 +139,7 @@ export class EmailIndex extends React.Component {
     onToggleIsRead = (emailId, isRead) => {
         emailService.toggleIsRead(emailId, isRead)
             .then(() => {
-                let {emails} = this.state
+                let { emails } = this.state
                 const emailIdx = emails.findIndex(email => email.id === emailId)
                 emails[emailIdx].isRead = true
                 this.setState({ emails })
@@ -134,7 +147,7 @@ export class EmailIndex extends React.Component {
     }
 
     render() {
-        const { emails, loggedInUser, isModalOpened } = this.state
+        const { emails, loggedInUser, isModalOpened, savedNote } = this.state
         const { onToggleIsRead,
             onSetSortBy,
             onSetSearchFilter,
@@ -159,6 +172,7 @@ export class EmailIndex extends React.Component {
                 />
             </div>
             <ModalCompose
+                savedNote={savedNote}
                 composeEmail={composeEmail}
                 isModalOpened={isModalOpened}
                 toggleModal={toggleModal}
