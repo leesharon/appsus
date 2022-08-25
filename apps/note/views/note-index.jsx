@@ -17,6 +17,12 @@ export class NoteIndex extends React.Component {
 
     componentDidMount() {
         this.loadNotes()
+        eventBusService.on('mail-to-note', (mail) => {
+            noteService.createNote('txt', mail)
+                .then((newNote) => {
+                    this.setState({ notes: [newNote, ...this.state.notes] })
+                })
+        })
     }
 
     loadNotes = () => {
@@ -116,7 +122,7 @@ export class NoteIndex extends React.Component {
         const { notes, chosenNote } = this.state
         if (!notes) return <h1>loading from index</h1>
         const { onNewNote, onEditNote, onChoseNote, onSaveChanges, onRemoveNote,
-            onPinNote, onChangeNoteColor, onEditText, onEditColor,onEditPin } = this
+            onPinNote, onChangeNoteColor, onEditText, onEditColor, onEditPin } = this
         const pinnedNotes = notes.filter((note) => note.isPinned)
         const unPinnedNotes = notes.filter((note) => !note.isPinned)
 
@@ -125,7 +131,7 @@ export class NoteIndex extends React.Component {
                 {chosenNote && <NoteDetails onSaveChanges={onSaveChanges} onEditText={onEditText}
                     note={chosenNote} onEditNote={onEditNote} onPinNote={onEditPin}
                     onChangeNoteColor={onEditColor} onRemoveNote={onRemoveNote} />}
-                    
+
                 <NoteCompose onNewNote={onNewNote} />
 
                 {pinnedNotes.length > 0 && <NoteList notes={pinnedNotes} onChangeNoteColor={onChangeNoteColor}
