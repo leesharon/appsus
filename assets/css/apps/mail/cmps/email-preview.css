@@ -4,7 +4,7 @@
 }
 
 .email-preview.unread {
-    background-color: #2C2C2C;
+    background-color: rgb(44, 44, 44, 0.8);
 }
 
 .email-preview td.unread {

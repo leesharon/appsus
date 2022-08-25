@@ -3,6 +3,7 @@
 /* Setup */
 @import './setup/variables.css';
 @import './setup/fonts.css';
+@import '../fonts/css/icons.css';
 
 /* Basics */
 @import './basics/base.css';

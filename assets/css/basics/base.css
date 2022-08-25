@@ -1,5 +1,7 @@
+
 body {
     margin: 0;
+    font-family: 'open-sans';
 }
 
 h1,
@@ -14,12 +16,6 @@ h6 {
 a {
     text-decoration: none;
     color: inherit;
-}
-
-img {
-    height: 100%;
-    width: 100%;
-    object-fit: cover;
 }
 
 ul {

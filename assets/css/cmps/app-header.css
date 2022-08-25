@@ -1,17 +1,36 @@
-header {
-    background: lightcyan;
-    border-bottom: 2px solid white;
-}
 
 .app-header {
     display: flex;
     justify-content: space-between;
     padding: 20px 0;
+    background: #21659c;
+    color: white;
+    font-size: 1.3em;
+    align-items: center;
 }
 
 .app-header .main-logo {
     display: flex;
     align-items: center;
+    font-size: 1.4em;
+}
+
+.app-header .main-logo img {
+    margin-inline-end: 10px;
+}
+
+.app-header nav {
+    position: absolute;
+    right: 10px;
+    top: 90px;
+    width: 300px;
+    background-color: #554994;
+    height: 200px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
 }
 
 nav a {

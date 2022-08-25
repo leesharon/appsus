@@ -14,11 +14,15 @@
 }
 
 .email-list tr {
-    height: 50px;
+    height: 40px;
     margin: 10px 0px;
     justify-content: space-between;
     transition: box-shadow .3s;
     transition: color .3s;
+}
+
+.email-list tr td:last-child {
+    text-align: center;
 }
 
 .email-list tr:hover {
