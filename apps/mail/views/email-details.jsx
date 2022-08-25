@@ -1,15 +1,13 @@
+import { eventBusService } from "../../../services/event-bus.service.js"
 import { utilService } from "../../../services/util.service.js"
-import { emailService } from "../services/email.service.js"
 
-export class EmailDetails extends React.Component {
+export function EmailDetails ({email, onRemoveEmail}) {
 
-    state = {
-        email: null
-    }
-
-    render() {
-        const { email, onRemoveEmail } = this.props
         const sentAt = utilService.getDatePreview(email.sentAt)
+
+        function onSaveNote(email) {
+            eventBusService.emit('mail-to-note', {title: email.subject, txt: email.body})
+        }
 
         return <React.Fragment>
             <tr className="email-details">
@@ -19,8 +17,8 @@ export class EmailDetails extends React.Component {
                 <p>{email.body}</p>
                 <button className="btn btn-respond"><i className="fa-solid fa-reply"></i> Reply</button>
                 <button className="btn btn-forward"><i className="fa-solid fa-share"></i> Forward</button>
+                <button onClick={() => {onSaveNote(email)}}>SaveNote</button>
                 </td>
             </tr>
         </React.Fragment>
-    }
 }
