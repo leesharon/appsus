@@ -1,0 +1,14 @@
+
+tr.email-details {
+    position: relative;
+}
+
+.email-details i.remove-email {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}
+
+.email-details i.remove-email:hover {
+    color: white;
+}

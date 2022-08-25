@@ -8,7 +8,8 @@ export const emailService = {
   getNextEmailId,
   getLoggedInUser,
   add,
-  setEmailStatus
+  setEmailStatus,
+  toggleIsRead
 }
 
 const KEY = 'emailsDB'
@@ -76,7 +77,12 @@ function setEmailStatus(emailId, status) {
 
 function remove(emailId) {
   let emails = _loadFromStorage()
-  emails = emails.filter(email => email.id !== emailId)
+  const emailIdx = emails.findIndex(email => email.id === emailId)
+  emails[emailIdx].status = (emails[emailIdx].status !== 'trash') ? 'trash' : 'remove'
+  
+  if (emails[emailIdx].status === 'remove') {
+    emails = emails.filter(email => email.id !== emailId)
+  }
   _saveToStorage(emails)
   return Promise.resolve()
 }
@@ -93,6 +99,15 @@ function getById(emailId) {
   const emails = _loadFromStorage()
   const email = emails.find(email => email.id === emailId)
   return Promise.resolve(email)
+}
+
+function toggleIsRead(emailId, isRead) {
+  let emails = _loadFromStorage()
+  const emailIdx = emails.findIndex(email => email.id === emailId)
+  emails[emailIdx].isRead = true
+
+  _saveToStorage(emails)
+  return Promise.resolve(emails)
 }
 
 function add(to, subject, body) {

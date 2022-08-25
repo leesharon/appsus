@@ -59,7 +59,6 @@ export class EmailIndex extends React.Component {
                 console.log('Removed!')
                 const emails = this.state.emails.filter(email => email.id !== emailId)
                 this.setState({ emails })
-                //! showSuccessMsg('Car removed')
             })
             .catch(err => {
                 console.log('Problem!!', err)
@@ -88,31 +87,43 @@ export class EmailIndex extends React.Component {
     setStar = (emailId) => {
         emailService.setEmailStatus(emailId, 'starred')
             .then(() => {
-                const {emails} = this.state
+                const { emails } = this.state
                 const emailIdx = emails.findIndex(email => email.id === emailId)
                 emails[emailIdx].status = (emails[emailIdx].status === 'starred') ? null : 'starred'
             })
     }
 
+    onToggleIsRead = (emailId, isRead) => {
+        emailService.toggleIsRead(emailId, isRead)
+    }
+
     render() {
         const { emails, loggedInUser, isModalOpened } = this.state
+        const { onToggleIsRead,
+            onSetSearchFilter,
+            toggleModal,
+            onRemoveEmail,
+            setStar,
+            composeEmail
+        } = this
 
         if (!emails) return <h1>Loading...</h1>
         return <section className="full email-index">
-            <EmailFilter onSetSearchFilter={this.onSetSearchFilter} />
+            <EmailFilter onSetSearchFilter={onSetSearchFilter} />
             <div className="main-content">
-                <EmailSideBar toggleModal={this.toggleModal} />
+                <EmailSideBar toggleModal={toggleModal} />
                 <EmailList
                     loggedInUser={loggedInUser}
-                    onRemoveEmail={this.onRemoveEmail}
+                    onRemoveEmail={onRemoveEmail}
                     emails={emails}
-                    setStar={this.setStar}
+                    setStar={setStar}
+                    onToggleIsRead={onToggleIsRead}
                 />
             </div>
             <ModalCompose
-                composeEmail={this.composeEmail}
+                composeEmail={composeEmail}
                 isModalOpened={isModalOpened}
-                toggleModal={this.toggleModal}
+                toggleModal={toggleModal}
             />
         </section >
     }

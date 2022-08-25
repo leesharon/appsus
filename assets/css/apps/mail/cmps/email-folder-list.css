@@ -9,6 +9,7 @@
 
 .folder-list li:hover {
     cursor: pointer;
+    color: white;
 }
 
 .folder-list i {
