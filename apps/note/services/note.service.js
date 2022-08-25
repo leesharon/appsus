@@ -1,8 +1,6 @@
 import { storageService } from "../../../services/storage.service.js"
 import { utilService } from "../../../services/util.service.js"
 
-
-
 export const noteService = {
     getNotes,
     createNote,
@@ -16,7 +14,6 @@ export const noteService = {
 
 const notesKEY = 'notesDB'
 
-
 function getNotes() {
     let notes = _loadNotesFromStorage()
     if (!notes) {
@@ -26,7 +23,6 @@ function getNotes() {
     return Promise.resolve(notes)
 }
 
-
 function EditNote(newNote) {
     let notes = _loadNotesFromStorage()
     notes = notes.map((note) => (note.id === newNote.id) ? newNote : note)
@@ -34,17 +30,18 @@ function EditNote(newNote) {
     return Promise.resolve(newNote)
 
 }
+
 function getById(noteId) {
     if (!noteId) return Promise.resolve(null)
     const notes = _loadNotesFromStorage()
     const note = notes.find(note => noteId === note.id)
     return Promise.resolve(note)
 }
+
 function isPinned(noteId) {
     const notes = _loadNotesFromStorage()
     const note = notes.find(note => noteId === note.id)
     return Promise.resolve(note.isPinned)
-
 }
 
 function removeNote(noteId) {
@@ -53,7 +50,6 @@ function removeNote(noteId) {
     notes = notes.filter(note => noteId !== note.id)
     _saveNotesToStorage(notes)
     return Promise.resolve()
-
 }
 
 function createNote(type, content) {
@@ -71,12 +67,10 @@ function createNote(type, content) {
         case ('todos'):
             newNote = _createTodosNote(content)
             break
-
     }
     const notes = _loadNotesFromStorage()
     notes.unshift(newNote)
     _saveNotesToStorage(notes)
-    console.log(newNote)
     return Promise.resolve(newNote)
 }
 
@@ -85,8 +79,6 @@ function ChangeNoteColor(noteId, color) {
     notes.forEach(note => { if (note.id === noteId) note.style.backgroundColor = color })
     _saveNotesToStorage(notes)
     return Promise.resolve()
-
-
 }
 
 function pinNote(noteId) {
@@ -162,7 +154,6 @@ function _createTodosNote({ title, todos }) {
             backgroundColor: 'white'
         }
     }
-
 }
 
 

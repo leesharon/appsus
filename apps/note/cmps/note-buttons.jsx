@@ -35,8 +35,8 @@ export class NoteButtons extends React.Component {
     }
 
     onSendNoteAsEmail = () => {
-        const {note} = this.props
-        eventBusService.emit('note-to-email',note.info)
+        const {noteId} = this.props
+        eventBusService.emit('note-to-email',noteId)
     }
     render() {
         const { noteId, onRemoveNote } = this.props

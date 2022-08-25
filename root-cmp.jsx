@@ -15,8 +15,13 @@ export function App() {
         noteService.createNote('txt', mail)
     })
 
-    console.log('window: ', window)
-    
+    eventBusService.on('note-to-email', (noteId) => {
+        const currUrl = window.location.href
+        const destinationUrl = currUrl.substring(0, currUrl.length - 4) + 'mail/compose/' + noteId
+        window.location.href = destinationUrl
+
+    })
+
     return <Router>
         <section className="app main-layout">
             <AppHeader />

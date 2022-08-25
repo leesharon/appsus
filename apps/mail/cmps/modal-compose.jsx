@@ -8,6 +8,13 @@ export class ModalCompose extends React.Component {
         }
     }
 
+    componentDidUpdate(prevState) {
+        if (this.props.savedNote === prevState.savedNote) return
+        if (this.props.savedNote) {
+            this.composeEmailFromNote(this.props.savedNote)
+        }
+    }
+
     handleChange = ({ target }) => {
         const field = target.name
         const value = target.value
@@ -25,11 +32,17 @@ export class ModalCompose extends React.Component {
         this.props.composeEmail(this.state.compose)
     }
 
+    composeEmailFromNote = ({ info }) => {
+        const { toggleModal } = this.props
+        this.setState({ compose: { to: '', subject: info.title, body: info.txt } })
+        toggleModal()
+    }
+
     render() {
-        const {onComposeEmail} = this
-        const {isModalOpened, toggleModal} = this.props
+        const { onComposeEmail, composeEmailFromNote } = this
+        const { isModalOpened, toggleModal, savedNote } = this.props
         const { to, subject, body } = this.state.compose
-        const modalClass = isModalOpened ? 'modal-opened' : '' 
+        const modalClass = isModalOpened ? 'modal-opened' : ''
 
         return <div className={`modal-compose ${modalClass}`}>
             <div className="modal-header">
@@ -56,7 +69,7 @@ export class ModalCompose extends React.Component {
                     type="textarea"
                     placeholder=""
                     name="body"
-                    rows="10" 
+                    rows="10"
                     cols="2"
                     value={body}
                     onChange={this.handleChange}
