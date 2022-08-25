@@ -3,7 +3,6 @@
     flex-direction: column;
     gap: 32px;
     flex-basis: 10%;
-    min-height: 91vh;
     margin-top: 13px;
     margin-inline-start: 5px;
 }

@@ -1,0 +1,15 @@
+.btn-rate {
+    font-size: 1.3em;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+.on {
+    color: #FFED5B;
+}
+
+.off {
+    color: #ccc;
+}

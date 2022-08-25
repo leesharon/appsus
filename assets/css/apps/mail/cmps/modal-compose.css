@@ -1,0 +1,56 @@
+
+
+.modal-compose {
+    background-color: #FFFFFF;
+    width: 550px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    position: fixed;
+    right: 70px;
+    bottom: 20px;
+    transform: translateY(200%);
+    transition: transform .6s;
+}
+
+.modal-compose.modal-opened {
+    transform: translateY(0);
+}
+
+.modal-compose .modal-header {
+    display: flex;
+    justify-content: space-between;
+    margin: 15px;
+}
+
+.modal-compose .modal-header .btn-close {
+    background-color: transparent;
+}
+
+.modal-compose form {
+    display: flex;
+    flex-direction: column;
+    margin: 15px;
+}
+
+.modal-compose form input {
+    border: none;
+}
+
+.modal-compose form input:not(:last-of-type) {
+    height: 30px;
+    border-bottom: 1px solid #F2F2F2;
+}
+
+.modal-compose form input[type="textarea"] {
+    padding-top: 20px;
+    padding-bottom: 300px;
+}
+
+.modal-compose .btn-send {
+    background-color: #1C62D1;
+    color: white;
+    padding: 10px;
+    border-radius: 20px;
+    width: 20%;
+}

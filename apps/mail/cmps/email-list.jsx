@@ -1,6 +1,6 @@
 import { EmailPreview } from "./email-preview.jsx";
 
-export function EmailList({ emails, onRemoveEmail }) {
+export function EmailList({ emails, onRemoveEmail, loggedInUser, setStar }) {
 
     return <section className="email-list">
         <table>
@@ -9,6 +9,8 @@ export function EmailList({ emails, onRemoveEmail }) {
                     key={email.id}
                     email={email}
                     onRemoveEmail={onRemoveEmail}
+                    loggedInUser={loggedInUser}
+                    setStar={setStar}
                 />)}
             </tbody>
         </table>

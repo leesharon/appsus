@@ -28,6 +28,10 @@ ul {
     list-style-type: none;
 }
 
+button {
+    border: none;
+}
+
 button:hover {
     cursor: pointer;
 }
