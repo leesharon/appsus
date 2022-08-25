@@ -11,9 +11,10 @@
     align-items: center;
     height: 32px;
     width: 200px;
-    border-top-right-radius: 15px;
-    border-bottom-right-radius: 15px;
-    padding-inline-start: 10px;
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
+    margin-inline-end: 10px;
+    padding-inline-start: 26px;
     padding-top: 3px;
     padding-bottom: 3px;
     transition: background-color .3s;
@@ -33,5 +34,5 @@
 }
 
 .folder-list i {
-    margin-inline-end: 8px;
+    margin-inline-end: 18px;
 }

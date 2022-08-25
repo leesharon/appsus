@@ -1,18 +1,16 @@
-
 .app-header {
     display: flex;
     justify-content: space-between;
     padding: 20px 0;
     background: #21659c;
     color: white;
-    font-size: 1.3em;
     align-items: center;
 }
 
 .app-header .main-logo {
     display: flex;
     align-items: center;
-    font-size: 1.4em;
+    font-size: 1.8em;
 }
 
 .app-header .main-logo img {
@@ -20,29 +18,50 @@
 }
 
 .app-header nav {
+    background-color: #554994;
     position: absolute;
     right: 10px;
     top: 90px;
     width: 300px;
-    background-color: #554994;
-    height: 200px;
-    display: flex;
+    height: 250px;
+    padding: 0 10px;
+    border-radius: 10px;
+    display: none;
+    flex-direction: column;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    border-radius: 10px;
 }
 
-nav a {
-    margin: .5em;
+.app-header nav.show {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.app-header nav .nav-link {
+    display: flex;
+    flex-direction: column;
+    padding: 15px 20px;
+    border-radius: 15px;
+}
+
+.app-header .nav-link img {
+    margin-bottom: 10px;
+}
+
+.app-header nav .nav-link:hover {
+    background-color: #453a7dce;
+}
+
+.app-header .btn-menu {
+    background-color: transparent;
+    font-size: 1.4em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 nav a:active {
     color: purple;
-}
-
-nav a.active {
-    color: darkblue;
-    font-weight: bold;
-    text-decoration: overline;
 }

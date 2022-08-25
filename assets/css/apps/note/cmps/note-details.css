@@ -29,6 +29,10 @@
     align-items: center;
 }
 
+.edit-note img {
+    width:100%;
+}
+
 .edit-note-btns-container>button {
     border: none;
     background-color: transparent;

@@ -23,6 +23,7 @@
 
 .email-list tr td:last-child {
     text-align: center;
+    font-size: 0.8rem;
 }
 
 .email-list tr:hover {

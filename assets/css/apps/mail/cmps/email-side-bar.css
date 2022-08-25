@@ -4,8 +4,8 @@
 }
 
 .email-side-bar .compose {
-    margin-bottom: 50px;
-    margin-inline-start: 5px;
+    margin-bottom: 16px;
+    margin-inline-start: 12px;
     width: 100px;
     height: 40px;
     display: flex;
