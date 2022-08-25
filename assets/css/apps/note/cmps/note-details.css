@@ -6,6 +6,65 @@
     background-color: #5f636857;
 }
 
+.todo-list {
+    width: 100%;
+}
+
+.todo-list li .todo-check {
+    width: 20px;
+}
+.todo-list li .todo-txt {
+    max-width:70%;
+    overflow-wrap: break-word;
+}
+.note p {
+    max-width:90%;
+    overflow-wrap: break-word;
+}
+
+.todo-list>li {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.edit-note-btns-container>button {
+    border: none;
+    background-color: transparent;
+}
+
+.edit-note-btns-container {
+    width: inherit;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.edit-note form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-self: center;
+    width: 70%;
+    margin-bottom: 10px;
+
+}
+
+.edit-note form input {
+    background-color: transparent;
+    border: none;
+    width: 100%;
+    height: 30px;
+    font-size: 1.5em;
+}
+
+.edit-note form textarea {
+    background-color: transparent;
+    border: none;
+    width: 100%;
+    height: 200px;
+    resize: none;
+}
 
 
 .edit-note {
@@ -14,10 +73,11 @@
     align-items: center;
     z-index: 80;
     position: fixed;
-    right:50%;
-    bottom:50%;
-    transform:translate(50%,50%);
-    width:60%;
+    right: 50%;
+    bottom: 50%;
+    transform: translate(50%, 50%);
+    width: 60%;
+    border-radius: 8px;
 }
 
 .edit-note.white {

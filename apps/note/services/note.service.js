@@ -61,11 +61,22 @@ function createNote(type, content) {
     switch (type) {
         case ('txt'):
             newNote = _createTxtNote(content)
+            break
+        case ('video'):
+            newNote = _createYtNote(content)
+            break
+        case ('img'):
+            newNote = _createImageNote(content)
+            break
+        case ('todos'):
+            newNote = _createTodosNote(content)
+            break
 
     }
     const notes = _loadNotesFromStorage()
     notes.unshift(newNote)
     _saveNotesToStorage(notes)
+    console.log(newNote)
     return Promise.resolve(newNote)
 }
 
@@ -99,6 +110,61 @@ function _createTxtNote({ title, txt }) {
         }
     }
 }
+
+function _createImageNote({ title, imgUrl }) {
+    return {
+        id: utilService.makeId(),
+        type: 'note-img',
+        isPinned: false,
+        info: {
+            title,
+            imgUrl
+        },
+        style: {
+            backgroundColor: 'white'
+        }
+    }
+}
+
+function _createYtNote({ title, videoLink }) {
+    const templateLink = 'https://www.youtube.com/embed/'
+    const startingIdx = videoLink.indexOf('=')
+    const endingIdx = videoLink.indexOf('&')
+    const videoId = videoLink.substring(startingIdx + 1, endingIdx)
+    videoLink = templateLink + videoId
+    return {
+        id: utilService.makeId(),
+        type: 'note-video',
+        isPinned: false,
+        info: {
+            title,
+            videoLink
+        },
+        style: {
+            backgroundColor: 'white'
+        }
+    }
+}
+
+function _createTodosNote({ title, todos }) {
+    todos = todos.map((todo) => (todo) ? { txt: todo, doneAt: null } : null)
+    todos = todos.filter(todo => (todo !== null))
+
+    return {
+        id: utilService.makeId(),
+        type: 'note-todos',
+        isPinned: false,
+        info: {
+            title,
+            todos
+        },
+        style: {
+            backgroundColor: 'white'
+        }
+    }
+
+}
+
 
 function _saveNotesToStorage(notes) {
     storageService.saveToStorage(notesKEY, notes)
