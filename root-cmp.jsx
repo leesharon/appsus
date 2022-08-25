@@ -15,15 +15,18 @@ export function App() {
         noteService.createNote('txt', mail)
     })
 
+    console.log('window: ', window)
+    
     return <Router>
         <section className="app main-layout">
             <AppHeader />
             <Switch>
+                <Route path="/mail/compose/:noteId" component={EmailIndex} />
                 <Route path="/mail/:folder?" component={EmailIndex} />
                 <Route path="/note" component={NoteIndex} />
                 <Route path="/about" component={About} />
                 <Route path="/" component={Home} />
             </Switch>
         </section>
-    </Router>
+    </Router> 
 }

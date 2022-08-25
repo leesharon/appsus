@@ -144,6 +144,8 @@ export class EmailIndex extends React.Component {
             composeEmail
         } = this
 
+        console.log('this.props.match.params: ', this.props.match.params)
+
         if (!emails) return <h1>Loading...</h1>
         return <section className="full email-index">
             <EmailFilter onSetSearchFilter={onSetSearchFilter} />
