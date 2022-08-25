@@ -1,7 +1,23 @@
-.edit-note{
-    display:flex;
+.black-screen {
+    height: 100vh;
+    width: 100vw;
+    position: absolute;
+    z-index: 70;
+    background-color: #5f636857;
+}
+
+
+
+.edit-note {
+    display: flex;
     flex-direction: column;
     align-items: center;
+    z-index: 80;
+    position: fixed;
+    right:50%;
+    bottom:50%;
+    transform:translate(50%,50%);
+    width:60%;
 }
 
 .edit-note.white {
@@ -25,7 +41,7 @@
 }
 
 .edit-note.lightskyblue {
-    background-color: lightskyblue; 
+    background-color: lightskyblue;
 }
 
 .edit-note.peru {
