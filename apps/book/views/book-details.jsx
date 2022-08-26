@@ -15,7 +15,6 @@ export class BookDetails extends React.Component {
     }
 
     componentDidUpdate(prevProps) {
-        console.log('prevProps.match.params: ', prevProps.match.params)
         if (prevProps.match.params.bookId !== this.props.match.params.bookId) {
             this.loadBook()
         }

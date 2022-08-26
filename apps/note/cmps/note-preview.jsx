@@ -50,7 +50,6 @@ function _ImgNote({ info: { title, imgUrl } }) {
     )
 }
 function _TodosNote({ info: { title, todos } }) {
-    console.log(todos)
     return (
         <div>
             <h3>{title}</h3>

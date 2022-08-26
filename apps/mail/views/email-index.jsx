@@ -77,12 +77,12 @@ export class EmailIndex extends React.Component {
     onRemoveEmail = (emailId) => {
         emailService.remove(emailId)
             .then(() => {
-                console.log('Removed!')
+                console.log('removed')
                 const emails = this.state.emails.filter(email => email.id !== emailId)
                 this.setState({ emails })
             })
             .catch(err => {
-                console.log('Problem!!', err)
+                console.log('problem', err)
             })
     }
 

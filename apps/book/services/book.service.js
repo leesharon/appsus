@@ -479,11 +479,9 @@ function query(filterBy) {
 function getGoogleBooks(search) {
   let googleBooks = _loadGoogleBooksFromStorage() || {}
   if (googleBooks[search]) {
-    console.log('im from storage')
     return Promise.resolve(googleBooks[search])
   }
 
-  console.log('im from server')
   const searchFor = search.replaceAll(' ', '%20')
   const url = `https://www.googleapis.com/books/v1/volumes?printType=books&q=${searchFor}`
 
