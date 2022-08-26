@@ -3,6 +3,9 @@ const { NavLink } = ReactRouterDOM
 export function EmailFolderList({ toggleSideBar }) {
 
     return <ul className={`folder-list`}>
+        <li className="side-logo">
+            <h3 className="icon icon-horse-hopper">AppSus</h3>
+        </li>
         <li onClick={toggleSideBar}>
             <NavLink to="/mail/inbox">
                 <i className="fa-solid fa-inbox"></i>

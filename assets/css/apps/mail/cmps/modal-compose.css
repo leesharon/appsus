@@ -54,3 +54,25 @@
     border-radius: 20px;
     width: 20%;
 }
+
+/* FOR MOBILE ONLY */
+@media (max-width: 760px) {
+    .modal-compose {
+        width: 100%;
+        height: 65vh;
+        right: 0;
+        bottom: 0;
+    }
+}
+
+@media (min-width: 540px) {
+}
+
+@media (min-width: 900px) {
+}
+
+@media (min-width: 1020px) {
+}
+
+@media (min-width: 1120px) {
+}

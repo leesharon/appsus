@@ -6,6 +6,10 @@
     margin-inline-start: 5px;
 }
 
+.folder-list .side-logo {
+    display: none;
+}
+
 .folder-list a {
     display: flex;
     align-items: center;
@@ -49,6 +53,16 @@
         background-color: #111111;
         transform: translateX(-100%);
         transition: transform .6s;
+        padding-top: 15px;
+    }
+
+    .folder-list .side-logo {
+        display: flex;
+        font-size: 1.4em;
+        border-bottom: 1px solid;
+        padding-inline-start: 26px;
+        padding-bottom: 10px;
+        margin-bottom: 10px;
     }
     
     .email-index.opened .folder-list {

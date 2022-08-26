@@ -1,15 +1,18 @@
 .app-header {
-    display: flex;
-    justify-content: space-between;
     padding: 20px 0;
     background: #21659c;
     color: white;
-    align-items: center;
+}
+
+.app-header .main-header-layout {
+    display: flex;
+    justify-content: space-between;
 }
 
 .app-header .main-logo {
     display: flex;
     align-items: center;
+    font-family: 'Nucleo';
     font-size: 1.8em;
 }
 
