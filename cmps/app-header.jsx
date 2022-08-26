@@ -16,7 +16,7 @@ export class AppHeader extends React.Component {
                 <i className="icon icon-horse-hopper"></i>
                 <h3>AppSus</h3>
             </Link>
-            <nav className={modalClass}>
+            <nav className={`${modalClass} animate__animated animate__fadeInTopRight `}>
                 <NavLink className="nav-link" onClick={this.onToggleModal} exact to="/">
                     <img src="../assets/img/home-3.svg" alt="" />
                     <span>Home</span>

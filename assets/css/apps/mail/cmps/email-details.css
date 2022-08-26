@@ -22,3 +22,25 @@ tr.email-details {
 .email-details i.remove-email:hover {
     color: white;
 }
+
+.email-details .btn {
+    padding: 10px 20px;
+    margin-inline-end: 10px;
+    border-radius: 30px;
+    border: 2px solid #999A99;
+    background-color: transparent;
+    color: #d1d3d1;
+}
+
+.email-details .btn:hover {
+    background-color: #f2f2f238;
+}
+
+.email-details .btn-save-note {
+    background-color: transparent;
+    position: absolute;
+    right: 40px;
+    top: 17px;
+    font-size: 1.2em;
+    color: white;
+}

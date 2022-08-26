@@ -1,12 +1,41 @@
 .email-index {
     background-color: #111111;
-    padding: 10px 20px 10px 0;
     color: #CACACA;
     font-family: 'open-sans';
     min-height: 90vh;
+    padding-top: 15px;
 }
 
-.main-content {
+.email-index .main-screen {
+    background-color: transparent;
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    display: none;
+    z-index: 10;
+    cursor: pointer;
+}
+
+.email-index.opened .main-screen {
+    display: unset;
+}
+
+.email-index .main-content {
     display: flex;
-    gap: 10px;
+}
+
+/* FOR MOBILE ONLY */
+@media (max-width: 760px) {
+}
+
+@media (min-width: 540px) {
+}
+
+@media (min-width: 900px) {
+}
+
+@media (min-width: 1020px) {
+}
+
+@media (min-width: 1120px) {
 }

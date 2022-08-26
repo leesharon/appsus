@@ -35,3 +35,38 @@ textarea:focus, input:focus{
 .email-filter .btn-search:focus {
     outline: none;
 }
+
+.email-filter .btn-side-bar {
+    display: none;
+}
+
+/* FOR MOBILE ONLY */
+@media (max-width: 760px) {
+    .email-filter form {
+        width: 80%;
+        display: flex;
+        justify-content: center;
+    }
+    
+    .email-filter .btn-side-bar {
+        display: unset;
+        background-color: transparent;
+        margin-inline-end: 10px;
+    }
+
+    .email-filter .btn-search {
+        order: 1;
+    }
+}
+
+@media (min-width: 540px) {
+}
+
+@media (min-width: 900px) {
+}
+
+@media (min-width: 1020px) {
+}
+
+@media (min-width: 1120px) {
+}

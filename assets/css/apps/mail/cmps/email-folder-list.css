@@ -36,3 +36,36 @@
 .folder-list i {
     margin-inline-end: 18px;
 }
+
+/* FOR MOBILE ONLY */
+@media (max-width: 760px) {
+
+    .folder-list {
+        position: fixed;
+        left: -5px;
+        top: -15px;
+        width: 80%;
+        height: 100vh;
+        background-color: #111111;
+        transform: translateX(-100%);
+        transition: transform .6s;
+    }
+    
+    .email-index.opened .folder-list {
+        transform: translateX(0%);
+
+    }
+
+}
+
+@media (min-width: 540px) {
+}
+
+@media (min-width: 900px) {
+}
+
+@media (min-width: 1020px) {
+}
+
+@media (min-width: 1120px) {
+}
