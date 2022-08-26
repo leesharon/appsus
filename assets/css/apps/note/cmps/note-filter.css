@@ -1,0 +1,26 @@
+.note-filter {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: .5em;
+    box-shadow: 1px 1px 6px 1px rgb(0 0 0 / 10%);
+
+}
+
+.note-filter button {
+    font-size: 2em;
+    border: none;
+    background-color: transparent;
+    color: #21659c;
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    gap: .5em;
+
+}
+
+.note-filter button span {
+    font-family: 'open-sans';
+
+}

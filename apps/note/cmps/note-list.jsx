@@ -6,7 +6,8 @@ export class NoteList extends React.Component {
 
 
     render() {
-        const { notes, onChoseNote, onRemoveNote, onPinNote, onChangeNoteColor } = this.props
+        const { notes, onChoseNote, onRemoveNote, onPinNote,
+            onChangeNoteColor, onDuplicate, onMarkDone } = this.props
         if (!notes) return <h1>loading</h1>
         return (
             <section className="notes-container">
@@ -14,13 +15,13 @@ export class NoteList extends React.Component {
                     const { backgroundColor } = note.style
                     return (
                         <article className={`note ${backgroundColor}`} key={note.id}>
-                            <NotePreview note={note} />
+                            <NotePreview onMarkDone={onMarkDone} note={note} />
                             <section className="button-list">
                                 <button onClick={() => onChoseNote(note)}>
                                     <i className="fa-solid fa-pen"></i>
                                 </button>
-                                <NoteButtons onChangeNoteColor={onChangeNoteColor} onRemoveNote={onRemoveNote}
-                                    onPinNote={onPinNote} noteId={note.id} note={note}/>
+                                <NoteButtons onMarkDone={onMarkDone} onDuplicate={onDuplicate} onChangeNoteColor={onChangeNoteColor} onRemoveNote={onRemoveNote}
+                                    onPinNote={onPinNote} noteId={note.id} note={note} />
                             </section>
                         </article>
 

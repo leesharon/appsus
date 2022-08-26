@@ -1,7 +1,9 @@
 import { eventBusService } from "../../../services/event-bus.service.js";
 import { NoteCompose } from "../cmps/note-compose.jsx";
 import { NoteDetails } from "../cmps/note-details.jsx";
+import { NoteFilter } from "../cmps/note-filter.jsx";
 import { NoteList } from "../cmps/note-list.jsx";
+import { NoteSearch } from "../cmps/note-search.jsx";
 import { noteService } from "../services/note.service.js";
 
 
@@ -12,7 +14,15 @@ export class NoteIndex extends React.Component {
 
     state = {
         notes: null,
-        chosenNote: null
+        chosenNote: null,
+        filterBy: {
+            'note-video': false,
+            'note-img': false,
+            'note-todos': false,
+            'note-txt': false,
+            searchBy: ''
+
+        }
     }
 
     componentDidMount() {
@@ -26,7 +36,7 @@ export class NoteIndex extends React.Component {
     }
 
     loadNotes = () => {
-        noteService.getNotes()
+        noteService.getNotes(this.state.filterBy)
             .then((notes) => this.setState({ notes }))
     }
 
@@ -96,8 +106,6 @@ export class NoteIndex extends React.Component {
         this.setState({ chosenNote: null })
     }
 
-
-
     onPinNote = (noteId) => {
         noteService.pinNote(noteId).then(() => {
             let notes = this.state.notes
@@ -117,32 +125,86 @@ export class NoteIndex extends React.Component {
             )
     }
 
-    // onSendAsMail = () => {
-    //     noteService.getById()
-    // }
+    onDuplicate = (noteId) => {
+        noteService.duplicateNote(noteId)
+            .then((newNote) => {
+                const notes = this.state.notes
+                notes.unshift(newNote)
+                this.setState({ notes: [...notes] })
+            })
+    }
+
+    onFilterBy = (filterBy) => {
+        this.setState({
+            filterBy: {
+                ...this.state.filterBy,
+                [filterBy]: !this.state.filterBy[filterBy]
+            }
+        },
+            this.loadNotes)
+    }
+
+    onMarkDone = (noteId, todoIndex) => {
+        noteService.changeIsDone(noteId, todoIndex)
+            .then((refactoredNote) => {
+                let notes = this.state.notes
+                notes = notes.map((note) => (note.id === noteId) ? refactoredNote : note)
+                this.setState({ notes })
+
+            })
+    }
+
+    onEditCheckBox = (todoIndex) => {
+        const note = this.state.chosenNote
+        if (!note.info.todos[todoIndex].doneAt) {
+            note.info.todos[todoIndex].doneAt = new Date()
+        } else {
+            note.info.todos[todoIndex].doneAt = null
+        }
+
+        this.setState({ chosenNote: { ...note } })
+    }
+
+    onSearchNotes = (value) => {
+        this.setState({
+            filterBy: {
+                ...this.state.filterBy,
+                searchBy: value
+            }
+        },
+            this.loadNotes)
+    }
 
 
     render() {
-        const { notes, chosenNote } = this.state
+        const { notes, chosenNote, filterBy } = this.state
         if (!notes) return <h1>loading from index</h1>
-        const { onNewNote, onEditNote, onChoseNote, onSaveChanges, onRemoveNote,
-            onPinNote, onChangeNoteColor, onEditText, onEditColor, onEditPin } = this
+        const { onNewNote, onEditNote, onChoseNote, onSaveChanges,
+            onRemoveNote, onPinNote, onChangeNoteColor, onEditText,
+            onEditColor, onEditPin, onDuplicate, onFilterBy, onMarkDone,
+            onEditCheckBox, onSearchNotes } = this
         const pinnedNotes = notes.filter((note) => note.isPinned)
         const unPinnedNotes = notes.filter((note) => !note.isPinned)
 
         return (
             <main className="main-note-app full">
-                {chosenNote && <NoteDetails onSaveChanges={onSaveChanges} onEditText={onEditText}
+                {chosenNote && <NoteDetails onEditCheckBox={onEditCheckBox} onDuplicate={onDuplicate} onSaveChanges={onSaveChanges} onEditText={onEditText}
                     note={chosenNote} onEditNote={onEditNote} onPinNote={onEditPin}
                     onChangeNoteColor={onEditColor} onRemoveNote={onRemoveNote} />}
-
+                <NoteSearch onSearchNotes={onSearchNotes} />
                 <NoteCompose onNewNote={onNewNote} />
+                <section className="notes-and-filter">
+                    <NoteFilter filterBy={filterBy} onFilterBy={onFilterBy} />
 
-                {pinnedNotes.length > 0 && <NoteList notes={pinnedNotes} onChangeNoteColor={onChangeNoteColor}
-                    onChoseNote={onChoseNote} onPinNote={onPinNote} onRemoveNote={onRemoveNote} />}
+                    <div>
+                        {pinnedNotes.length > 0 && <NoteList onMarkDone={onMarkDone} onDuplicate={onDuplicate} notes={pinnedNotes} onChangeNoteColor={onChangeNoteColor}
+                            onChoseNote={onChoseNote} onPinNote={onPinNote} onRemoveNote={onRemoveNote} />}
 
-                {unPinnedNotes.length > 0 && <NoteList notes={unPinnedNotes} onChangeNoteColor={onChangeNoteColor}
-                    onChoseNote={onChoseNote} onPinNote={onPinNote} onRemoveNote={onRemoveNote} />}
+                        {unPinnedNotes.length > 0 && <NoteList onMarkDone={onMarkDone} onDuplicate={onDuplicate} notes={unPinnedNotes} onChangeNoteColor={onChangeNoteColor}
+                            onChoseNote={onChoseNote} onPinNote={onPinNote} onRemoveNote={onRemoveNote} />}
+                    </div>
+
+                </section>
             </main>
         )
     }

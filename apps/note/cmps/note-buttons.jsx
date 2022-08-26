@@ -29,25 +29,28 @@ export class NoteButtons extends React.Component {
     }
 
     onColorSelect = (color) => {
-        const { onChangeNoteColor, noteId } = this.props
+        const { onChangeNoteColor, noteId, onDuplicate} = this.props
         onChangeNoteColor(noteId, color)
         this.setState({ isColorPaletteOpen: false })
     }
 
     onSendNoteAsEmail = () => {
-        const {noteId} = this.props
-        eventBusService.emit('note-to-email',noteId)
+        const { noteId } = this.props
+        eventBusService.emit('note-to-email', noteId)
     }
     render() {
-        const { noteId, onRemoveNote } = this.props
+        const { noteId, onRemoveNote, onDuplicate } = this.props
         const { isPinned, isColorPaletteOpen } = this.state
-        const { onChangePinned, toggleColorPalette, onColorSelect,onSendNoteAsEmail } = this
+        const { onChangePinned, toggleColorPalette, onColorSelect, onSendNoteAsEmail } = this
         const labelClassName = (isPinned) ? 'pinned' : 'unpinned'
         return (
 
             <React.Fragment>
+                <button onClick={() => { onDuplicate(noteId) }}>
+                    <i className="fa-solid fa-clone"></i>
+                </button>
                 <button onClick={onSendNoteAsEmail}>
-                <i className="fa-solid fa-at"></i>
+                    <i className="fa-solid fa-at"></i>
                 </button>
                 <button onClick={() => { onRemoveNote(noteId) }}>
                     <i className="fa-solid fa-trash-can"></i>

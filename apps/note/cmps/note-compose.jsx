@@ -79,7 +79,7 @@ export class NoteCompose extends React.Component {
                         <i className="fa-brands fa-youtube"></i>
                     </button>
                     <button onClick={() => { onTypeChange('txt') }}>
-                        T
+                    <i className="fa-solid fa-file-lines"></i>
                     </button>
                 </section>
             </section>

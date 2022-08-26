@@ -8,7 +8,8 @@ export class NoteDetails extends React.Component {
 
 
     render() {
-        const { onRemoveNote, onPinNote, onChangeNoteColor, note, onEditText, onSaveChanges } = this.props
+        const { onRemoveNote, onPinNote, onChangeNoteColor, note,
+            onEditText, onSaveChanges, onDuplicate, onEditCheckBox } = this.props
         const { title, txt } = note.info
         const { backgroundColor } = note.style
         return (
@@ -24,11 +25,11 @@ export class NoteDetails extends React.Component {
                             onChange={onEditText}
                         />
 
-                        <_NoteContent note={note} onEditText={onEditText} />
+                        <_NoteContent onEditCheckBox={onEditCheckBox} note={note} onEditText={onEditText} />
                     </form>
                     <section className="edit-note-btns-container">
                         <button onClick={onSaveChanges}>Save changes</button>
-                        <NoteButtons onChangeNoteColor={onChangeNoteColor} onRemoveNote={onRemoveNote}
+                        <NoteButtons onDuplicate={onDuplicate} onChangeNoteColor={onChangeNoteColor} onRemoveNote={onRemoveNote}
                             onPinNote={onPinNote} noteId={note.id} />
                     </section>
 
@@ -39,7 +40,7 @@ export class NoteDetails extends React.Component {
     }
 }
 
-function _NoteContent({ note, onEditText }) {
+function _NoteContent({ note, onEditText, onEditCheckBox }) {
     switch (note.type) {
         case ('note-txt'):
             return (
@@ -65,13 +66,17 @@ function _NoteContent({ note, onEditText }) {
         case ('note-todos'):
             return (
                 <ul className="todo-list">
-                    {note.info.todos.map((todo) => {
+                    {note.info.todos.map((todo, index) => {
                         return (
                             <li key={utilService.makeId()}>
-                                <p>{todo.txt}</p>
-                                <input className="todo-check" type="checkbox"
-                                    value={todo.DoneAt}
+                                <input
+                                    id={`todo-${index}-${note.id}`}
+                                    className="todo-check"
+                                    type="checkbox"
+                                    checked={(todo.doneAt) ? true : false}
+                                    onChange={() => { onEditCheckBox(index) }}
                                 />
+                                <label className="todo-txt" htmlFor={`todo-${index}-${note.id}`}>{todo.txt}</label>
                             </li>
                         )
                     })}

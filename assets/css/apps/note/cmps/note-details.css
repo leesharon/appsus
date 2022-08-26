@@ -1,6 +1,6 @@
 .black-screen {
-    height: 100vh;
-    width: 100vw;
+    height:inherit;
+    width: 97.5vw;
     position: absolute;
     z-index: 70;
     background-color: #5f636857;
@@ -8,17 +8,79 @@
 
 .todo-list {
     width: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
-.todo-list li .todo-check {
-    width: 20px;
+.todo-list li input[type="checkbox"] {
+    display: none;
 }
+
+.todo-list li label {
+    position: relative;
+    margin-inline-start: 27px;
+}
+
+.todo-list li label::before {
+    content: "";
+    background: url("check-circle.svg");
+    background-position: center;
+    background-size: contain;
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    left: -30px;
+    top: -4px;
+
+    transform: scale(0) rotateZ(180deg);
+    transition: all 0.4s cubic-bezier(0.54, 0.01, 0, 1.49);
+
+
+}
+
+.todo-list li input[type="checkbox"]:checked+label::before {
+    transform: scale(1) rotateZ(0deg);
+    transition: all 0.4s cubic-bezier(0.54, 0.01, 0, 1.49);
+}
+
+.todo-list li input[type="checkbox"]:checked+label {
+    text-decoration-line: line-through;
+}
+
+.todo-list li label::after {
+    content: "";
+    border: 2px solid lightgrey;
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    border-radius: 50%;
+    left: -30px;
+    top: -4.25px;
+
+
+}
+
+
+.todo-list li {
+    margin-bottom: 1.2em;
+}
+
+.todo-list li.done {
+    order: 1;
+}
+
+.todo-list li:first-child {
+    margin-top: 1em;
+}
+
+
 .todo-list li .todo-txt {
-    max-width:70%;
+    max-width: 90%;
     overflow-wrap: break-word;
 }
+
 .note p {
-    max-width:90%;
+    max-width: 90%;
     overflow-wrap: break-word;
 }
 
@@ -30,7 +92,7 @@
 }
 
 .edit-note img {
-    width:100%;
+    width: 100%;
 }
 
 .edit-note-btns-container>button {

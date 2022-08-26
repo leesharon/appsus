@@ -3,3 +3,9 @@
     padding: 5px 5px;
     background-color: snow;
 }
+.notes-and-filter {
+    display: flex;
+    padding-inline-end: 30px;
+    padding-inline-start: 5px;
+    gap:0.5em
+}

@@ -9,18 +9,38 @@ export const noteService = {
     removeNote,
     isPinned,
     pinNote,
-    ChangeNoteColor
+    ChangeNoteColor,
+    duplicateNote,
+    changeIsDone
 }
 
 const notesKEY = 'notesDB'
 
-function getNotes() {
+function getNotes(filterBy) {
     let notes = _loadNotesFromStorage()
     if (!notes) {
         notes = makeNotes()
         _saveNotesToStorage(notes)
     }
+    notes = notes.filter(note => _filterBySearch(note, filterBy.searchBy))
+    const filters = Object.values(filterBy)
+    filters[4] = false // turning the searchBy string to bolean so it doesnt interupt filtering through types
+    if (filters.some(filter => filter)) {   
+        notes = notes.filter((note) => filterBy[note.type])
+    }
+
     return Promise.resolve(notes)
+}
+
+function _filterBySearch(note, searchBy) {
+
+    if (note.info.title.toUpperCase().includes(searchBy.toUpperCase())) return true
+    if (note.type === 'note-txt') {
+        if (note.info.txt.toUpperCase().includes(searchBy.toUpperCase())) return true
+    }
+    if (note.type === 'note-todos') {
+        return note.info.todos.some(todo => todo.txt.toUpperCase().includes(searchBy.toUpperCase()))
+    }
 }
 
 function EditNote(newNote) {
@@ -50,6 +70,29 @@ function removeNote(noteId) {
     notes = notes.filter(note => noteId !== note.id)
     _saveNotesToStorage(notes)
     return Promise.resolve()
+}
+
+function duplicateNote(noteId) {
+    const notes = _loadNotesFromStorage()
+    const note = notes.find(note => noteId === note.id)
+    const newNote = { ...note, id: utilService.makeId() }
+    notes.unshift(newNote)
+    _saveNotesToStorage(notes)
+    return Promise.resolve(newNote)
+
+
+}
+
+function changeIsDone(noteId, todoIndex) {
+    const notes = _loadNotesFromStorage()
+    const note = notes.find(note => noteId === note.id)
+    if (!note.info.todos[todoIndex].doneAt) {
+        note.info.todos[todoIndex].doneAt = new Date()
+    } else {
+        note.info.todos[todoIndex].doneAt = null
+    }
+    _saveNotesToStorage(notes)
+    return Promise.resolve(note)
 }
 
 function createNote(type, content) {

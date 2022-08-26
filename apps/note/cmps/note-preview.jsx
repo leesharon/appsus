@@ -1,5 +1,5 @@
 import { utilService } from "../../../services/util.service.js"
-export function NotePreview({ note }) {
+export function NotePreview({ note, onMarkDone }) {
 
     function DynamicCmp() {
         switch (note.type) {
@@ -10,7 +10,7 @@ export function NotePreview({ note }) {
             case ('note-img'):
                 return _ImgNote(note)
             case ('note-todos'):
-                return _TodosNote(note)
+                return _TodosNote(note, onMarkDone)
         }
     }
     return (
@@ -21,53 +21,57 @@ export function NotePreview({ note }) {
 
 function _TxtNote({ info: { title, txt } }) {
     return (
-        <div>
+        <React.Fragment>
             <h3>{title}</h3>
             <p>{txt}</p>
-        </div>
+        </React.Fragment>
     )
 }
 
 function _VideoNote({ info: { title, videoLink } }) {
     return (
-        <div>
+        <React.Fragment>
             <h3>{title}</h3>
             <iframe src={videoLink}>
 
             </iframe>
-        </div>
+        </React.Fragment>
     )
 }
 
 function _ImgNote({ info: { title, imgUrl } }) {
     return (
-        <div>
+        <React.Fragment>
             <h3>{title}</h3>
             <img src={imgUrl}>
 
             </img>
-        </div>
+        </React.Fragment>
     )
 }
-function _TodosNote({ info: { title, todos } }) {
-    console.log(todos)
+function _TodosNote({ info: { title, todos }, id }, onMarkDone) {
+    const todoDones = todos.filter(todo => todo.doneAt)
+    const todoUnDones = todos.filter(todo => !todo.doneAt)
     return (
-        <div>
+        <React.Fragment>
             <h3>{title}</h3>
             <ul className="todo-list">
-                {todos.map((todo) => {
+                {todos.map((todo, index) => {
                     return (
                         <li key={utilService.makeId()}>
-                            <p  className="todo-txt" >{todo.txt}</p>
-                            <input className="todo-check"  type="checkbox"
-                                value={todo.DoneAt}
+                            <input
+                                className="todo-check"
+                                type="checkbox"
+                                checked={(todo.doneAt) ? true : false}
+                                id={`todo-${index}-${id}`}
+                                onChange={() => { onMarkDone(id, index) }}
                             />
+                            <label className="todo-txt" htmlFor={`todo-${index}-${id}`}>{todo.txt}</label>
+
                         </li>
                     )
                 })}
             </ul>
-        </div >
+        </React.Fragment >
     )
 }
-
-
