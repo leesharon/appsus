@@ -134,7 +134,9 @@ export class EmailIndex extends React.Component {
         this.setState({ isModalOpened: !isModalOpened })
     }
 
-    toggleSideBar = () => {
+    toggleSideBar = (isMenuItem) => {
+        const {isFolderListOpened} = this.state
+        if (isMenuItem && !isFolderListOpened) return
         this.setState(({isFolderListOpened}) => ({ isFolderListOpened: !isFolderListOpened }))
     }
 

@@ -13,7 +13,7 @@ export const emailService = {
 }
 
 const KEY = 'emailsDB'
-const gEmails = _createEmails(50)
+const gEmails = _createEmails(70)
 const gLoggedInUser = {
   email: 'user@appsus.com',
   fullName: 'Mahatma Appsus'
@@ -62,11 +62,11 @@ function query(filterBy) {
           break;
 
         case 'unread':
-          emails = emails.filter(email => email.isRead === false)
+          emails = emails.filter(email => email.isRead == false)
           break;
 
         case 'read':
-          emails = emails.filter(email => email.isRead === true)
+          emails = emails.filter(email => email.isRead == true)
           break;
       }
     }
@@ -140,11 +140,11 @@ function _createEmail(to, subject, body) {
     id: utilService.makeId(),
     subject: subject || utilService.makeLorem(3),
     body: body || utilService.makeLorem(10),
-    isRead: utilService.getRandomIntInclusive(0, 2),
-    status: null,
+    isRead: utilService.getRandomIntInclusive(0, 3),
+    status: utilService.getEmailStatus(),
     sentAt: Date.now(),
     to: to || (utilService.getRandomIntInclusive(0, 1) ? 'momo@momo.com' : 'user@appsus.com'),
-    from: 'google@gmail.com'  
+    from: utilService.getRandomEmailAddress()  
   }
 }
 

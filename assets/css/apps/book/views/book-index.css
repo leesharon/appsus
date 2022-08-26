@@ -1,0 +1,26 @@
+
+.book-index {
+    background-color: lightblue;
+    font-family: Dosis;
+}
+
+.main-content .main-layout {
+    display: flex;
+    flex-direction: column;
+}
+
+
+@font-face {
+    font-family: Dosis;
+    src: url(../../fonts/Dosis/Dosis-Medium.ttf);
+}
+
+.btn {
+    border: none;
+    border-radius: 10px;
+}
+
+.btn:hover {
+    cursor: pointer;
+    opacity: 0.8;
+}

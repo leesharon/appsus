@@ -1,0 +1,16 @@
+
+.about {
+    background-color: #ACD8E4;
+    height: 100vh;
+    text-align: center;
+}
+
+.about h1 {
+    font-size: 3em;
+    padding-top: 20px;
+    margin-bottom: 30px;
+}
+
+.about img {
+    margin-bottom: 30px;
+}

@@ -26,7 +26,7 @@ export class EmailPreview extends React.Component {
         return <React.Fragment>
             < tr onClick={() => {this.onShowEmail(email.id)}} className={`email-preview ${unreadClass}`} >
                 <td onClick={this.stopPropagation}><Rate setStar={setStar} email={email} /></td>
-                <td className={unreadClass} colSpan="2">{email.to}</td>
+                <td className={unreadClass} colSpan="2">{email.from}</td>
                 <td className={unreadClass} colSpan="10">{email.subject}</td>
                 <td className={`td-date ${unreadClass}`}>{sentAt}</td>
             </tr >
