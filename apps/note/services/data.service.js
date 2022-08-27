@@ -8,7 +8,7 @@ const note0 = {
         imgUrl: "assets/img/sombrerro.jpg",
         title: "Bandana"
     },
-    isPinned: true,
+    isPinned: false,
     style: { backgroundColor: "khaki" },
     type: "note-img"
 }
@@ -22,16 +22,17 @@ const note11 = {
     style: { backgroundColor: "khaki" },
     type: "note-img"
 }
-// const note12 = {
-//     id: "oA1RD8",
-//     info: {
-//         imgUrl: "assets/img/sombrerro.jpg",
-//         title: "Bandana"
-//     },
-//     isPinned: false,
-//     style: { backgroundColor: "khaki" },
-//     type: "note-img"
-// }
+const note12 = {
+    id: "Uyd3be",
+    info: {
+        imgUrl: "assets/img/200.gif",
+        title: "Apssus"
+    },
+    isPinned: true,
+    style: { backgroundColor: "lightgreen" },
+    type: "note-img"
+}
+
 const note1 = {
     id: "HNaPei",
     info: {
@@ -148,5 +149,5 @@ const note10 = {
 }
 
 function getDemoData() {
-    return [note0, note1, note2, note3, note4, note5, note6, note7, note8, note9, note10, note11]
+    return [note0, note1, note2, note3, note4, note5, note6, note7, note8, note9, note10, note11,note12]
 }
