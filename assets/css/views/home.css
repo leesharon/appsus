@@ -2,11 +2,18 @@
 
 .home .hero {
     background-image: url('../../img/hero.jpg');
-    background-size: contain ;
+    background-size: cover ;
     background-repeat: no-repeat;
     height: 600px;
     width: 100%;
+    text-align: center;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    align-items: center;
+    font-family: 'lato-bold';
+    font-size: 1.5em;
+}
+
+.home .slogan-container {
+    margin: auto;
 }
