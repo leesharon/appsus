@@ -50,8 +50,9 @@
     border-radius: 15px;
 }
 
-.app-header .nav-link img {
+.app-header .nav-link i {
     margin-bottom: 10px;
+    font-size: 2em;
 }
 
 .app-header nav .nav-link:hover {
