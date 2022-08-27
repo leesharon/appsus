@@ -1,6 +1,6 @@
-@import '../../lib/normalize.css';
-
+/************************** App ***************************/
 /* Setup */
+@import '../../lib/normalize.css';
 @import './setup/variables.css';
 @import './setup/fonts.css';
 @import '../fonts/css/icons.css';
@@ -12,17 +12,15 @@
 
 /* Views */
 @import './views/home.css';
-
-/* Email Views */
-@import './apps/mail/views/email-index.css';
-
-/* Note Views */
-@import './apps/note/views/note-index.css';
+@import './views/about.css';
 
 /* Cmps */
-
 @import './cmps/user-msg.css';
 @import './cmps/app-header.css';
+
+/************************** EMAIL ***************************/
+/* Email Views */
+@import './apps/mail/views/email-index.css';
 
 /* Email components */
 @import './apps/mail/cmps/email-filter.css';
@@ -35,13 +33,11 @@
 @import './apps/mail/cmps/modal-compose.css';
 @import './apps/mail/cmps/rate.css';
 
-
-
-
-
+/************************** Note ***************************/
+/* Note Views */
+@import './apps/note/views/note-index.css';
 
 /* Notes Cmps */
-@import './apps/note/cmps/note-index.css';
 @import './apps/note/cmps/note-preview.css';
 @import './apps/note/cmps/note-list.css';
 @import './apps/note/cmps/note-buttons.css';

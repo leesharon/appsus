@@ -10,6 +10,18 @@
     }
 }
 
+@media (min-width: 670px) {
+    .main-layout>*:not(.full) {
+        max-width: 630px;
+    }
+}
+
+@media (min-width: 800px) {
+    .main-layout>*:not(.full) {
+        max-width: 760px;
+    }
+}
+
 @media (min-width: 900px) {
     .main-layout>*:not(.full) {
         max-width: 860px;
@@ -24,6 +36,12 @@
 
 @media (min-width: 1120px) {
     .main-layout>*:not(.full) {
-        max-width: 90%;
+        max-width: 1080px;
+    }
+}
+
+@media (min-width: 1300px) {
+    .main-layout>*:not(.full) {
+        max-width: 1260px;
     }
 }

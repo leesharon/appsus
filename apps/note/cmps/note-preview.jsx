@@ -49,9 +49,8 @@ function _ImgNote({ info: { title, imgUrl } }) {
         </React.Fragment>
     )
 }
-function _TodosNote({ info: { title, todos }, id }, onMarkDone) {
-    const todoDones = todos.filter(todo => todo.doneAt)
-    const todoUnDones = todos.filter(todo => !todo.doneAt)
+function _TodosNote({ info: { title, todos } }) {
+    console.log(todos)
     return (
         <React.Fragment>
             <h3>{title}</h3>

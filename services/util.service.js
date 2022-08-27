@@ -7,7 +7,11 @@ export const utilService = {
     getDayName,
     getMonthName,
     getDatePreview,
-    trimString
+    trimString,
+    getCurrFullDate,
+    getCurrYear,
+    getRandomEmailAddress,
+    getEmailStatus
 }
 
 function makeId(length = 6) {
@@ -77,4 +81,31 @@ function trimString(string) {
     trimmedStr = trimmedStr.substring(0, Math.min(trimmedStr.length, trimmedStr.lastIndexOf(" ")))
     trimmedStr += '...'
     return trimmedStr
+}
+
+function getCurrYear() {
+    return new Date().getFullYear()
+}
+
+function getCurrFullDate() {
+    const date = new Date()
+    const year = date.getFullYear()
+    let month = date.getMonth() + 1 +''
+    if (month.length < 2) month = 0 + month
+    let day = date.getDate() + ''
+    if (day.length < 2) day = 0 + day
+
+    return `${year}-${month}-${day}`
+}
+
+function getRandomEmailAddress() {
+    const addresses = [ 'VScode' ,'Investing.' ,'Spectacles' ,'FontAwesome' ,'NordVPN' ,'Slack' ,'Google', 'Apple', 'Coding Academy', 'Wix', 'Amazon', 'GitHub', 'Cal', 'LinkedIn', 'Dropbox', 'Avocode', 'Facebook', 'Instagram']
+    const idx = getRandomIntInclusive(0, addresses.length - 1)
+    return addresses[idx]
+}
+
+function getEmailStatus() {
+    const statusList = ['trash', 'starred', '']
+    const idx = getRandomIntInclusive(0, statusList.length - 1)
+    return statusList[idx]
 }

@@ -1,0 +1,58 @@
+
+
+.reviews-container .review-submit{
+    
+    width: 50%;
+    margin-top: 40px;
+}
+
+.reviews-container .review-submit h2{
+}
+
+.reviews-container .review-submit form{
+    background-color: #1F9595;
+    padding: 20px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.reviews-container .review-submit form div:last-of-type {
+    display: flex;
+    flex-direction: column;
+}
+
+.reviews-container .review-submit input {
+    border: none;
+    border-radius: 20px;
+    padding: 10px;
+}
+
+.reviews-container form .btn-review {
+    width: 30%;
+    padding: 10px 20px;
+    background-color: #73CFD2;
+    align-self: center;
+    color: #E7F2F5;
+}
+
+.reviews {
+}
+
+.reviews .review {
+    background-color: #1F9595;
+    padding: 10px 20px;
+    margin-bottom: 20px;
+    width: 50%;
+    border-radius: 20px;
+    position: relative;
+}
+
+.reviews .review .btn-close{
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background-color: transparent;
+    padding: 10px;
+}

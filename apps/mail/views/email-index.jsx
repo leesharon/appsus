@@ -1,4 +1,5 @@
 
+import { eventBusService } from "../../../services/event-bus.service.js"
 import { noteService } from "../../note/services/note.service.js"
 import { EmailFilter } from "../cmps/email-filter.jsx"
 import { EmailList } from "../cmps/email-list.jsx"
@@ -19,19 +20,27 @@ export class EmailIndex extends React.Component {
             isDateDesc: 1,
             isSubjDesc: 1
         },
-        savedNote: null
+        savedNote: null,
+        isFolderListOpened: false
     }
 
     componentDidMount() {
         const { folder, noteId } = this.props.match.params
-        if (noteId) this.getNote(noteId)
+        const { loadEmails, loadUser, toggleSideBar, getNote} = this
+
+        if (noteId) getNote(noteId)
         this.setState((prevState) => ({
             filterBy: {
                 ...prevState.filterBy,
                 folder
             }
-        }), () => this.loadEmails())
-        this.loadUser()
+        }), () => loadEmails())
+        loadUser()
+
+        // add listener for sidebar open
+        eventBusService.on('side-bar-open', () => {
+            toggleSideBar()
+        })
     }
 
     getNote = (noteId) => {
@@ -68,12 +77,12 @@ export class EmailIndex extends React.Component {
     onRemoveEmail = (emailId) => {
         emailService.remove(emailId)
             .then(() => {
-                console.log('Removed!')
+                console.log('removed')
                 const emails = this.state.emails.filter(email => email.id !== emailId)
                 this.setState({ emails })
             })
             .catch(err => {
-                console.log('Problem!!', err)
+                console.log('problem', err)
             })
     }
 
@@ -125,6 +134,12 @@ export class EmailIndex extends React.Component {
         this.setState({ isModalOpened: !isModalOpened })
     }
 
+    toggleSideBar = (isMenuItem) => {
+        const {isFolderListOpened} = this.state
+        if (isMenuItem && !isFolderListOpened) return
+        this.setState(({isFolderListOpened}) => ({ isFolderListOpened: !isFolderListOpened }))
+    }
+
     setStar = (emailId) => {
         emailService.setEmailStatus(emailId, 'starred')
             .then(() => {
@@ -145,8 +160,11 @@ export class EmailIndex extends React.Component {
     }
 
     render() {
-        const { emails, loggedInUser, isModalOpened, savedNote } = this.state
+        const { emails, loggedInUser, isModalOpened, savedNote, isFolderListOpened } = this.state
+        if (!emails) return <h1>Loading...</h1>
+
         const { onToggleIsRead,
+            toggleSideBar,
             onSetSortBy,
             onSetSearchFilter,
             toggleModal,
@@ -154,12 +172,14 @@ export class EmailIndex extends React.Component {
             setStar,
             composeEmail
         } = this
+        const isListOpenedClass = isFolderListOpened ? 'opened' : ''
 
-        if (!emails) return <h1>Loading...</h1>
-        return <section className="full email-index">
+
+        return <section className={`full email-index ${isListOpenedClass}`}>
+            <div className="main-screen" onClick={toggleSideBar}></div>
             <EmailFilter onSetSearchFilter={onSetSearchFilter} />
             <div className="main-content">
-                <EmailSideBar toggleModal={toggleModal} />
+                <EmailSideBar toggleModal={toggleModal} toggleSideBar={toggleSideBar}/>
                 <EmailList
                     loggedInUser={loggedInUser}
                     onRemoveEmail={onRemoveEmail}

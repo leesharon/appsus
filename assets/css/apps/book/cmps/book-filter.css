@@ -1,0 +1,26 @@
+
+.book-filter {
+    margin-bottom: 20px;
+    padding-top: 20px;
+}
+
+.book-filter form {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+}
+
+.book-filter form .input-search {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+}
+
+.book-filter form input[type='range']:hover {
+    cursor: grab;
+}
+
+.book-filter form input[type='range']:active {
+    cursor: grabbing;
+}

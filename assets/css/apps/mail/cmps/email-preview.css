@@ -3,6 +3,24 @@
     color: #B9B9B9;
 }
 
+.email-preview {
+    height: 40px;
+    margin: 10px 0px;
+    justify-content: space-between;
+    transition: box-shadow .3s;
+    transition: color .3s;
+}
+
+.email-preview .td-date {
+    font-size: 0.8rem;
+}
+
+.email-preview:hover {
+    box-shadow: 0px 0px 5px 4px rgb(255 255 255 / 12%);
+    cursor: pointer;
+    color: white;
+}
+
 .email-preview.unread {
     background-color: rgb(44, 44, 44, 0.8);
 }
@@ -10,4 +28,23 @@
 .email-preview td.unread {
     color: white;
     font-family: 'open-sans-bold';
+}
+
+/* FOR MOBILE ONLY */
+@media (max-width: 760px) {
+    .email-preview {
+        height: 80px;
+    }
+}
+
+@media (min-width: 540px) {
+}
+
+@media (min-width: 900px) {
+}
+
+@media (min-width: 1020px) {
+}
+
+@media (min-width: 1120px) {
 }

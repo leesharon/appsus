@@ -1,0 +1,47 @@
+
+
+.book-details {
+    font-size: 1.2em;
+    background-color: lightblue;
+    height: 100vh;
+}
+
+.book-details .book-container{
+    display: flex;
+    justify-content: space-around;
+    padding-top: 30px;
+}
+
+.book-details .red {
+    color: red;
+}
+
+.book-details .green {
+    color: green;
+}
+
+.book-details .book-container .img-container {
+    flex-basis: 50%;
+    display: flex;
+    justify-content: center;
+}
+
+.book-details .book-container .book-info {
+    flex-basis: 50%;
+}
+
+.book-details .btn-back,
+.book-details .btn-remove {
+    background-color: #62cdcd;
+    color: #F5F9F9;
+    margin-top: 50px;
+    padding: 10px 20px;
+}
+
+.book-details .btn-back {
+    margin-inline-end: 20px;
+}
+
+.book-details .btn-remove {
+    background-color: #E96C5F;
+}
