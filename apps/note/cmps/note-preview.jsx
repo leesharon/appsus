@@ -49,8 +49,7 @@ function _ImgNote({ info: { title, imgUrl } }) {
         </React.Fragment>
     )
 }
-function _TodosNote({ info: { title, todos } }) {
-    console.log(todos)
+function _TodosNote({ id, info: { title, todos } }, onMarkDone) {
     return (
         <React.Fragment>
             <h3>{title}</h3>

@@ -1,4 +1,7 @@
 .note-filter {
+    position: absolute;
+    z-index: 80;
+    background-color: snow;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -6,6 +9,34 @@
     gap: .5em;
     box-shadow: 1px 1px 6px 1px rgb(0 0 0 / 10%);
 
+}
+
+.note-filter.closed {
+    transform: translateX(-120%);
+    transition: 0.2s;
+}
+
+.note-filter.open {
+    transform: translateX(-7%);
+    transition: 0.2s;
+}
+
+@media (min-width:600px) {
+    .toggle-filter-btn {
+        display: none;
+    }
+
+    .note-filter {
+        position: relative;
+    }
+
+    .note-filter.closed {
+        transform: translateX(0);
+    }
+
+    .note-filter.open {
+        transform: translateX(0);
+    }
 }
 
 .note-filter button {

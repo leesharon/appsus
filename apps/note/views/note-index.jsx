@@ -22,7 +22,8 @@ export class NoteIndex extends React.Component {
             'note-txt': false,
             searchBy: ''
 
-        }
+        },
+        filterBarOpen: false
     }
 
     componentDidMount() {
@@ -175,16 +176,20 @@ export class NoteIndex extends React.Component {
             this.loadNotes)
     }
 
+    onToggleFilter = () => {
+        this.setState({ filterBarOpen: !this.state.filterBarOpen })
+    }
 
     render() {
-        const { notes, chosenNote, filterBy } = this.state
+        const { notes, chosenNote, filterBy, filterBarOpen } = this.state
         if (!notes) return <h1>loading from index</h1>
         const { onNewNote, onEditNote, onChoseNote, onSaveChanges,
             onRemoveNote, onPinNote, onChangeNoteColor, onEditText,
             onEditColor, onEditPin, onDuplicate, onFilterBy, onMarkDone,
-            onEditCheckBox, onSearchNotes } = this
+            onEditCheckBox, onSearchNotes, onToggleFilter } = this
         const pinnedNotes = notes.filter((note) => note.isPinned)
         const unPinnedNotes = notes.filter((note) => !note.isPinned)
+        const filterBarClass = (filterBarOpen) ? 'open' : 'closed'
 
         return (
             <main className="main-note-app full">
@@ -193,8 +198,11 @@ export class NoteIndex extends React.Component {
                     onChangeNoteColor={onEditColor} onRemoveNote={onRemoveNote} />}
                 <NoteSearch onSearchNotes={onSearchNotes} />
                 <NoteCompose onNewNote={onNewNote} />
+                <button onClick={onToggleFilter} className="toggle-filter-btn">
+                    <i className="fa-solid fa-bars"></i>
+                </button>
                 <section className="notes-and-filter">
-                    <NoteFilter filterBy={filterBy} onFilterBy={onFilterBy} />
+                    <NoteFilter  filterBarClass={filterBarClass} filterBy={filterBy} onFilterBy={onFilterBy} />
 
                     <div>
                         {pinnedNotes.length > 0 && <NoteList onMarkDone={onMarkDone} onDuplicate={onDuplicate} notes={pinnedNotes} onChangeNoteColor={onChangeNoteColor}
