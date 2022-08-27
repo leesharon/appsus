@@ -36,7 +36,7 @@ function query(filterBy) {
     if (search) {
       emails = emails.filter(email => (
         email.body.includes(search) ||
-        email.to.includes(search) ||
+        email.from.includes(search) ||
         email.subject.includes(search)
       ))
     } else {

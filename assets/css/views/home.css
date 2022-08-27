@@ -1,10 +1,12 @@
+.home {
+    background-color: #ACD8E3;
+    height: 100vh;
+}
 
-
-.home .hero {
-    background-image: url('../../img/hero.jpg');
-    background-size: cover ;
+.home .hero-container {
+    /* background-size: cover ; */
+    padding-top: 50px;
     background-repeat: no-repeat;
-    height: 600px;
     width: 100%;
     text-align: center;
     display: flex;
@@ -12,8 +14,15 @@
     align-items: center;
     font-family: 'lato-bold';
     font-size: 1.5em;
+    position: relative;
+}
+
+.home .hero-container img {
+    width: 100%;
 }
 
 .home .slogan-container {
-    margin: auto;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
 }

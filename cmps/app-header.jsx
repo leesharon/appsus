@@ -31,7 +31,7 @@ export class AppHeader extends React.Component {
                         <span>Mail</span>
                     </NavLink>
                     <NavLink className="nav-link" onClick={this.onToggleModal} to="/book">
-                        <img src="../assets/img/books-46.svg" alt="" />
+                        <img src="../assets/img/books-46.jpg" alt="" />
                         <span>Books</span>
                     </NavLink>
                     <NavLink className="nav-link about" onClick={this.onToggleModal} to="/about">

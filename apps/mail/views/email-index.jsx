@@ -24,6 +24,8 @@ export class EmailIndex extends React.Component {
         isFolderListOpened: false
     }
 
+    audioSent = new Audio('../../../assets/sound/sent.wav')
+
     componentDidMount() {
         const { folder, noteId } = this.props.match.params
         const { loadEmails, loadUser, toggleSideBar, getNote} = this
@@ -121,6 +123,7 @@ export class EmailIndex extends React.Component {
     composeEmail = ({ to, subject, body }) => {
         emailService.add(to, subject, body)
             .then((email) => {
+                this.audioSent.play()
                 if (this.state.filterBy.folder === 'sent') {
                     const { emails } = this.state
                     emails.unshift(email)
