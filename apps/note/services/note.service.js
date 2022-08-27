@@ -1,5 +1,6 @@
 import { storageService } from "../../../services/storage.service.js"
 import { utilService } from "../../../services/util.service.js"
+import { dataService } from "./data.service.js"
 
 export const noteService = {
     getNotes,
@@ -25,7 +26,7 @@ function getNotes(filterBy) {
     notes = notes.filter(note => _filterBySearch(note, filterBy.searchBy))
     const filters = Object.values(filterBy)
     filters[4] = false // turning the searchBy string to bolean so it doesnt interupt filtering through types
-    if (filters.some(filter => filter)) {   
+    if (filters.some(filter => filter)) {
         notes = notes.filter((note) => filterBy[note.type])
     }
 
@@ -209,66 +210,5 @@ function _loadNotesFromStorage() {
 }
 
 function makeNotes() {
-    return [
-        {
-            id: utilService.makeId(),
-            type: "note-txt",
-            isPinned: false,
-            info: {
-                title: 'random',
-                txt: "Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!"
-            },
-            style: {
-                backgroundColor: 'white'
-            }
-        },
-        {
-            id: utilService.makeId(),
-            type: "note-txt",
-            isPinned: false,
-            info: {
-                title: 'tritle',
-                txt: "Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!"
-            },
-            style: {
-                backgroundColor: 'white'
-            }
-        },
-        {
-            id: utilService.makeId(),
-            type: "note-txt",
-            isPinned: false,
-            info: {
-                title: 'tritle',
-                txt: "Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!"
-            },
-            style: {
-                backgroundColor: 'white'
-            }
-        },
-        {
-            id: utilService.makeId(),
-            type: "note-txt",
-            isPinned: false,
-            info: {
-                title: 'title',
-                txt: "Fullstack Me Baby!"
-            },
-            style: {
-                backgroundColor: 'white'
-            }
-        },
-        {
-            id: utilService.makeId(),
-            type: "note-txt",
-            isPinned: false,
-            info: {
-                title: 'something',
-                txt: "Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!Fullstack Me Baby!"
-            },
-            style: {
-                backgroundColor: 'white'
-            }
-        },
-    ]
+    return dataService.getDemoData()
 }

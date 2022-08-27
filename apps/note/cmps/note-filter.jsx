@@ -45,6 +45,7 @@ export class NoteFilter extends React.Component {
                     onClick={() => { onClickBtn('note-txt'); onFilterBy('note-txt') }}>
                     <i className="fa-solid fa-file-lines"> </i><span>Text</span></button>
             </aside>
+
         )
     }
 }

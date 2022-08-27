@@ -63,6 +63,7 @@
 
     .note-filter {
         position: relative;
+        top: 0;
     }
 
     .note-filter.closed {
