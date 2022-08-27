@@ -141,7 +141,7 @@ function _createTxtNote({ title, txt }) {
             txt,
         },
         style: {
-            backgroundColor: 'white'
+            backgroundColor: utilService.getRandomNoteColor()
         }
     }
 }
@@ -156,7 +156,7 @@ function _createImageNote({ title, imgUrl }) {
             imgUrl
         },
         style: {
-            backgroundColor: 'white'
+            backgroundColor: utilService.getRandomNoteColor()
         }
     }
 }
@@ -176,7 +176,7 @@ function _createYtNote({ title, videoLink }) {
             videoLink
         },
         style: {
-            backgroundColor: 'white'
+            backgroundColor: utilService.getRandomNoteColor()
         }
     }
 }
@@ -194,7 +194,7 @@ function _createTodosNote({ title, todos }) {
             todos
         },
         style: {
-            backgroundColor: 'white'
+            backgroundColor: utilService.getRandomNoteColor()
         }
     }
 }

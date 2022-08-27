@@ -13,25 +13,25 @@ export class NoteSearch extends React.Component {
 
     render() {
         const { searchBy } = this.state
-        const { onHandleChange,onClearState } = this
+        const { onHandleChange, onClearState } = this
         const { onSearchNotes } = this.props
         return (
             <div className="search-container">
+                <button className="search-btn" onClick={() => { onSearchNotes(searchBy) }}>
+                    <i className="fa-solid fa-magnifying-glass"></i>
+                </button >
                 <input
                     value={searchBy}
                     onChange={onHandleChange}
                     name="searchBy"
                     type="text"
                     placeholder="Search" />
-                <button onClick={() => { onSearchNotes(searchBy) }}>
-                    <i className="fa-solid fa-magnifying-glass"></i>
-                </button>
-                {searchBy && <button onClick={()=>{
+                {searchBy && <button className="clear-search-btn" onClick={() => {
                     onClearState()
                     onSearchNotes('')
                 }}>
                     <i className="fa-solid fa-xmark"></i>
-                    </button>}
+                </button>}
             </div>
         )
     }

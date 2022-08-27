@@ -29,7 +29,7 @@ export class NoteButtons extends React.Component {
     }
 
     onColorSelect = (color) => {
-        const { onChangeNoteColor, noteId, onDuplicate} = this.props
+        const { onChangeNoteColor, noteId, onDuplicate } = this.props
         onChangeNoteColor(noteId, color)
         this.setState({ isColorPaletteOpen: false })
     }
@@ -50,7 +50,7 @@ export class NoteButtons extends React.Component {
                     <i className="fa-solid fa-clone"></i>
                 </button>
                 <button onClick={onSendNoteAsEmail}>
-                    <i className="fa-solid fa-at"></i>
+                    <i className="fa-solid fa-envelope"></i>
                 </button>
                 <button onClick={() => { onRemoveNote(noteId) }}>
                     <i className="fa-solid fa-trash-can"></i>
@@ -68,6 +68,8 @@ export class NoteButtons extends React.Component {
                     <button className="color-btn slateblue" onClick={() => { onColorSelect('slateblue') }}></button>
                     <button className="color-btn lightskyblue" onClick={() => { onColorSelect('lightskyblue') }}></button>
                     <button className="color-btn peru" onClick={() => { onColorSelect('peru') }}></button>
+                    <button className="color-btn khaki" onClick={() => { onColorSelect('khaki') }}></button>
+                    <button className="color-btn orange" onClick={() => { onColorSelect('orange') }}></button>
 
                 </div>}
                 <input type="checkbox"

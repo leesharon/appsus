@@ -180,13 +180,14 @@ export class NoteIndex extends React.Component {
         this.setState({ filterBarOpen: !this.state.filterBarOpen })
     }
 
+
     render() {
         const { notes, chosenNote, filterBy, filterBarOpen } = this.state
         if (!notes) return <h1>loading from index</h1>
         const { onNewNote, onEditNote, onChoseNote, onSaveChanges,
             onRemoveNote, onPinNote, onChangeNoteColor, onEditText,
             onEditColor, onEditPin, onDuplicate, onFilterBy, onMarkDone,
-            onEditCheckBox, onSearchNotes, onToggleFilter } = this
+            onEditCheckBox, onSearchNotes, onToggleFilter, onToggleCompose } = this
         const pinnedNotes = notes.filter((note) => note.isPinned)
         const unPinnedNotes = notes.filter((note) => !note.isPinned)
         const filterBarClass = (filterBarOpen) ? 'open' : 'closed'
@@ -196,13 +197,19 @@ export class NoteIndex extends React.Component {
                 {chosenNote && <NoteDetails onEditCheckBox={onEditCheckBox} onDuplicate={onDuplicate} onSaveChanges={onSaveChanges} onEditText={onEditText}
                     note={chosenNote} onEditNote={onEditNote} onPinNote={onEditPin}
                     onChangeNoteColor={onEditColor} onRemoveNote={onRemoveNote} />}
-                <NoteSearch onSearchNotes={onSearchNotes} />
+
+                <React.Fragment>
+                    <NoteSearch onSearchNotes={onSearchNotes} />
+                    <button onClick={onToggleFilter} className="toggle-filter-btn">
+                        <i className="fa-solid fa-bars"></i>
+                    </button>
+                </React.Fragment>
+
+
                 <NoteCompose onNewNote={onNewNote} />
-                <button onClick={onToggleFilter} className="toggle-filter-btn">
-                    <i className="fa-solid fa-bars"></i>
-                </button>
+
                 <section className="notes-and-filter">
-                    <NoteFilter  filterBarClass={filterBarClass} filterBy={filterBy} onFilterBy={onFilterBy} />
+                    <NoteFilter filterBarClass={filterBarClass} filterBy={filterBy} onFilterBy={onFilterBy} />
 
                     <div>
                         {pinnedNotes.length > 0 && <NoteList onMarkDone={onMarkDone} onDuplicate={onDuplicate} notes={pinnedNotes} onChangeNoteColor={onChangeNoteColor}

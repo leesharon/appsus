@@ -28,7 +28,9 @@ export class NoteDetails extends React.Component {
                         <_NoteContent onEditCheckBox={onEditCheckBox} note={note} onEditText={onEditText} />
                     </form>
                     <section className="edit-note-btns-container">
-                        <button onClick={onSaveChanges}>Save changes</button>
+                        <button onClick={onSaveChanges}>
+                            <i className="fa-solid fa-xmark"></i>
+                            </button>
                         <NoteButtons onDuplicate={onDuplicate} onChangeNoteColor={onChangeNoteColor} onRemoveNote={onRemoveNote}
                             onPinNote={onPinNote} noteId={note.id} />
                     </section>

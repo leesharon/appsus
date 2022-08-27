@@ -6,7 +6,8 @@
 .button-list {
     width: inherit;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: flex-end;
+    gap:10px;
     opacity: 0;
     transition: 0.3s;
 }
@@ -42,39 +43,53 @@
     z-index: 100;
     position: absolute;
     width: inherit;
-    bottom: -43px;
-    background-color: white;
+    bottom: -1px;
+    background-color: snow;
     box-shadow: inset 1px 1px 0 rgb(0 0 0 / 10%), inset 0 -1px 0 rgb(0 0 0 / 7%);
 }
 
 .color-btn {
-    width: 40px;
-    height: 40px;
+    width: 32px;
+    height: 32px;
     border-radius: 50%;
-    border: 0.5px solid lightgray
+    border: 0.5px solid lightgray;
+    margin:2px;
 }
 
 button.plum {
-
+    border: 2px solid rgb(204, 135, 204);
     background-color: plum;
 }
 
 button.lightgreen {
+    border: 2px solid rgb(109, 216, 109);
     background-color: lightgreen;
 }
 
 button.lightcoral {
+    border: 2px solid rgb(216, 95, 95);
     background-color: lightcoral;
 }
 
 button.slateblue {
+    border:2px solid rgb(77, 62, 180);
     background-color: slateblue;
 }
 
 button.lightskyblue {
+    border:2px solid rgb(98, 172, 218);
     background-color: lightskyblue;
 }
 
 button.peru {
+    border:2px solid rgb(189, 118, 48);
     background-color: peru;
+}
+button.khaki {
+    border:2px solid rgb(219, 208, 105);
+    background-color: khaki
+}
+button.orange {
+    border:2px solid orange;
+    background-color: #f5bb52;
 }

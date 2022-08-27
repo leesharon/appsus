@@ -9,7 +9,7 @@
     border: lightgrey .5px solid;
 }
 
-.note:hover .button-list {
+.note .button-list {
     opacity: 1;
     transition: 0.4s;
 }
@@ -53,4 +53,24 @@ iframe {
 
 .note.peru {
     background-color: peru;
+}
+.note.khaki {
+    background-color: khaki;
+}
+
+.note.orange {
+    background-color: #f5bb52;
+}
+
+
+@media (min-width:600px) {
+    .note:hover .button-list {
+        opacity: 1;
+        transition: 0.4s;
+    }
+
+    .note .button-list {
+        opacity: 0;
+        transition: 0.3s;
+    }
 }

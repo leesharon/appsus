@@ -3,7 +3,11 @@
     padding: auto;
     display: flex;
     flex-direction: column;
+}
 
+.uploaded-image {
+    width: 100%;
+    object-fit: contain;
 }
 
 .note-compose form {

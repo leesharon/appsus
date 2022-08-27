@@ -1,7 +1,8 @@
 .black-screen {
     height:inherit;
     width: 97.5vw;
-    position: absolute;
+    height:100vh;
+    position: fixed;
     z-index: 70;
     background-color: #5f636857;
 }
@@ -166,6 +167,13 @@
     background-color: slateblue;
 }
 
+.edit-note.khaki {
+    background-color: khaki;
+}
+
+.edit-note.orange {
+    background-color: #f5bb52;
+}
 .edit-note.lightskyblue {
     background-color: lightskyblue;
 }

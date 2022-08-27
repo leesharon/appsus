@@ -11,7 +11,8 @@ export const utilService = {
     getCurrFullDate,
     getCurrYear,
     getRandomEmailAddress,
-    getEmailStatus
+    getEmailStatus,
+    getRandomNoteColor
 }
 
 function makeId(length = 6) {
@@ -90,7 +91,7 @@ function getCurrYear() {
 function getCurrFullDate() {
     const date = new Date()
     const year = date.getFullYear()
-    let month = date.getMonth() + 1 +''
+    let month = date.getMonth() + 1 + ''
     if (month.length < 2) month = 0 + month
     let day = date.getDate() + ''
     if (day.length < 2) day = 0 + day
@@ -99,7 +100,7 @@ function getCurrFullDate() {
 }
 
 function getRandomEmailAddress() {
-    const addresses = [ 'VScode' ,'Investing.' ,'Spectacles' ,'FontAwesome' ,'NordVPN' ,'Slack' ,'Google', 'Apple', 'Coding Academy', 'Wix', 'Amazon', 'GitHub', 'Cal', 'LinkedIn', 'Dropbox', 'Avocode', 'Facebook', 'Instagram']
+    const addresses = ['VScode', 'Investing.', 'Spectacles', 'FontAwesome', 'NordVPN', 'Slack', 'Google', 'Apple', 'Coding Academy', 'Wix', 'Amazon', 'GitHub', 'Cal', 'LinkedIn', 'Dropbox', 'Avocode', 'Facebook', 'Instagram']
     const idx = getRandomIntInclusive(0, addresses.length - 1)
     return addresses[idx]
 }
@@ -108,4 +109,9 @@ function getEmailStatus() {
     const statusList = ['trash', 'starred', '']
     const idx = getRandomIntInclusive(0, statusList.length - 1)
     return statusList[idx]
+}
+
+function getRandomNoteColor() {
+    const colors = ['peru', 'lightskyblue', 'slateblue', 'lightcoral', 'lightgreen', 'plum', 'white','khaki','orange']
+    return colors[getRandomIntInclusive(0, 8)]
 }

@@ -118,7 +118,7 @@ function ContentInput({ father: { state, onHandleChange, onUploadImage, onNewInp
                         type="file"
                         onChange={onUploadImage}
                     />
-                    <img src={state.info.imgUrl} />
+                    <img className="uploaded-image" src={state.info.imgUrl} />
                 </React.Fragment>
 
 
@@ -140,6 +140,7 @@ function CreateTodoInputs({ todos, onNewInput }) {
             value={todo}
             name={'todo' + index}
             onChange={onNewInput}
+            placeholder="To do.."
         />
     })
 }
